@@ -1,0 +1,66 @@
+{
+  "members": {
+    "2585735": {
+      "stars": 2,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "star_index": 2086,
+            "get_star_ts": 1733031334
+          },
+          "2": {
+            "star_index": 3763,
+            "get_star_ts": 1733031885
+          }
+        }
+      },
+      "global_score": 0,
+      "last_star_ts": 1733031885,
+      "id": 2585735,
+      "name": "Vladimir Pepik",
+      "local_score": 4
+    },
+    "2023891": {
+      "id": 2023891,
+      "stars": 2,
+      "completion_day_level": {
+        "1": {
+          "2": {
+            "star_index": 7274,
+            "get_star_ts": 1733033436
+          },
+          "1": {
+            "star_index": 4247,
+            "get_star_ts": 1733032070
+          }
+        }
+      },
+      "global_score": 0,
+      "last_star_ts": 1733033436,
+      "local_score": 2,
+      "name": "David North"
+    },
+    "3680988": {
+      "name": "Jeff Peng",
+      "local_score": 6,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1733030781,
+            "star_index": 0
+          },
+          "2": {
+            "star_index": 1018,
+            "get_star_ts": 1733031032
+          }
+        }
+      },
+      "global_score": 0,
+      "stars": 2,
+      "last_star_ts": 1733031032,
+      "id": 3680988
+    }
+  },
+  "event": "2024",
+  "owner_id": 2023891
+}
