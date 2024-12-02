@@ -10,24 +10,31 @@ class Part1:
 
     def getSafeRows(self):
 
+
+
         safe = 0
         for y in range(self.input.height):
 
-            rowSafe = True
-            prevValue = sys.maxsize
+            increasing = True
+            decreasing = True
+            safeDelta = True
 
             row = self.input.getRow(y)
 
-            for x in range(row.__len__()):
+            for x in range(1, row.__len__()):
+
                 value = row[x]
+                prevValue = row[x - 1]
+                delta = abs(value - prevValue)
 
-                if value >= prevValue:
-                    rowSafe = False
-                    break
+                if value > prevValue:   # Increasing
+                    decreasing = False
+                if value < prevValue:   # Decreasing
+                    increasing = False
+                if not (delta == 1 or delta == 2 or delta == 3):
+                    safeDelta = False
 
-                prevValue = value
-
-            if rowSafe:
+            if (increasing or decreasing) and safeDelta:
                 safe = safe + 1
 
         return safe
