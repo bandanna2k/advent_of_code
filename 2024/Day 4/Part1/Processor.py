@@ -50,10 +50,10 @@ class Processor:
                         # print("NE x{} y{}".format(x-3, y-3))
                         count = count + 1
 
-                    if 'X' == rows[y][x] and 'M' == rows[y-1][x-1] and 'A' == rows[y-2][x-2] and 'S' == rows[y-3][x-3]:
+                    if 'X' == rows[y][x] and 'M' == rows[y-1][x+1] and 'A' == rows[y-2][x+2] and 'S' == rows[y-3][x+3]:
                         # print("NW x{} y{}".format(x-3, y-3))
                         count = count + 1
-                    if 'S' == rows[y][x] and 'A' == rows[y-1][x-1] and 'M' == rows[y-2][x-2] and 'X' == rows[y-3][x-3]:
+                    if 'S' == rows[y][x] and 'A' == rows[y-1][x+1] and 'M' == rows[y-2][x+2] and 'X' == rows[y-3][x+3]:
                         # print("SE x{} y{}".format(x-3, y-3))
                         count = count + 1
             self.answer = count

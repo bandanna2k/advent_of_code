@@ -5,28 +5,40 @@ import re
 class Processor:
 
     answer = 0
-    multiplier = 1
 
     def __init__(self, filename):
 
-        with open(filename) as fp:
+        with (open(filename) as fp):
+            rows = []
             for line in fp:
-                self.processLine(line)
+                row = ([' '] * 3) + list(line.strip()) + ([' '] * 3)
+                rows = rows + [row]
 
-    def processLine(self, line):
-        muls = re.findall("mul\(\d+,\d+\)|don't|do", line)
-        for mul in muls:
+            width = rows[0].__len__() - 6
+            height = rows.__len__()
 
-            if mul == "do":
-                self.multiplier = 1
-            elif mul == "don't":
-                self.multiplier = 0
-            else:
-                values = re.findall("(\d+)", mul)
-                v = self.multiplier * int(values[0]) * int(values[1])
-                self.answer += v
+            for x in range(3):
+                rows = [([' '] * (width + 6))] + rows
+            for x in range(3):
+                rows = rows + [([' '] * (width + 6))] + rows
 
-            print("{} {}".format(mul, self.multiplier))
+            count = 0
+            for x in range(3,width+3):
+                # print('---------')
+                for y in range(3,height+3):
+                    # print("{} {}".format(x, y))
+                    assert rows[y][x] != ' '
+
+                    if 'M' == rows[y][x] and 'S' == rows[y][x+2] and 'A' == rows[y+1][x+1] and 'M' == rows[y+2][x] and 'S' == rows[y+2][x+2]:
+                        count = count + 1
+                    if 'S' == rows[y][x] and 'M' == rows[y][x+2] and 'A' == rows[y+1][x+1] and 'S' == rows[y+2][x] and 'M' == rows[y+2][x+2]:
+                        count = count + 1
+                    if 'S' == rows[y][x] and 'S' == rows[y][x+2] and 'A' == rows[y+1][x+1] and 'M' == rows[y+2][x] and 'M' == rows[y+2][x+2]:
+                        count = count + 1
+                    if 'M' == rows[y][x] and 'M' == rows[y][x+2] and 'A' == rows[y+1][x+1] and 'S' == rows[y+2][x] and 'S' == rows[y+2][x+2]:
+                        count = count + 1
+            self.answer = count
+
 
     def getAnswer(self):
         return self.answer
