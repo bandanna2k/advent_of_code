@@ -4,7 +4,7 @@ import re
 
 class Processor:
 
-    rules = []
+    ruleSet = set
     answer = 0
 
     def getAnswer(self):
@@ -14,8 +14,7 @@ class Processor:
 
         with open(rulesFilename) as fp:
             for line in fp:
-                split = line.split("|")
-                self.rules = self.rules + [[int(split[0]), int(split[1])]]
+                self.ruleSet = self.ruleSet.union({line.strip('\n')})
 
         goodUpdates = []
         badUpdates = []
@@ -53,12 +52,8 @@ class Processor:
                 no2 = update[second]
                 # print("{} {}".format(no1, no2))
 
-                for rule in self.rules:
-                    before = rule[0]
-                    after = rule[1]
-
-                    if before == no2 and after == no1:
-                        return False
+                if "{}|{}".format(no2, no1) in self.ruleSet:
+                    return False
         return True
 
     def maybeSwitchFirstBadRule(self, update):
@@ -71,15 +66,11 @@ class Processor:
                 no2 = update[second]
                 # print("{} {}".format(no1, no2))
 
-                for rule in self.rules:
-                    before = rule[0]
-                    after = rule[1]
-
-                    if before == no2 and after == no1:
-                        newUpdate = update.copy()
-                        newUpdate[first] = no2
-                        newUpdate[second] = no1
-                        return newUpdate
+                if "{}|{}".format(no2, no1) in self.ruleSet:
+                    newUpdate = update.copy()
+                    newUpdate[first] = no2
+                    newUpdate[second] = no1
+                    return newUpdate
         return update
 
 
