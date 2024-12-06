@@ -5,10 +5,10 @@ from Processor import Processor
 class Tests(unittest.TestCase):
 
     def test_the_test_input(self):
-        test = Processor('test_input_rules.txt', 'test_input_updates.txt')
+        test = Processor('test_input.txt', 'test_input_updates.txt')
         self.assertEqual(test.getAnswer(), 123)
 
     def test_the_real_input(self):
-        test = Processor('real_input_rules.txt', 'real_input_updates.txt')
+        test = Processor('real_input.txt', 'real_input_updates.txt')
         self.assertEqual(test.getAnswer(), 6897)
 
