@@ -24,7 +24,6 @@ class Processor:
                     origin = (maybeX, grid.__len__() - 1)
                 except ValueError:
                     pass
-        print("Init:".format(origin))
 
         maxX = grid[0].__len__()
         maxY = grid.__len__()
