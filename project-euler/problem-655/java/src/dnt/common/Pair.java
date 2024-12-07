@@ -1,6 +1,6 @@
 package dnt.common;
 
-class Pair<L, R>
+public class Pair<L, R>
 {
     private L left;
     private R right;

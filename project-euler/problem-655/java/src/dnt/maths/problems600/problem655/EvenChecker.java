@@ -1,5 +1,7 @@
 package dnt.maths.problems600.problem655;
 
+import dnt.common.Pair;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;

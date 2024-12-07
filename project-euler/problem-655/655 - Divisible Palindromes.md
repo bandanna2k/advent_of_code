@@ -27,3 +27,12 @@ TODO List 11 char palindromes
 
 
 10000000001
+
+
+Length: 8, Test Count: 7380, Palindrome Count: 0,
+Length: 10, Test Count: 66429, Palindrome Count: 0,
+Length: 12, Test Count: 597870, Palindrome Count: 0,
+Length: 14, Test Count: 5380839, Palindrome Count: 5,
+Length: 16, Test Count: 48427560, Palindrome Count: 53,
+Length: 18, Test Count: 435848049, Palindrome Count: 411,
+Length: 20, Test Count: -372334846, Palindrome Count: 3677, 
