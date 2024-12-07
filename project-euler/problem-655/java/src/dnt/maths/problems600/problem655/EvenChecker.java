@@ -5,6 +5,8 @@ import dnt.common.Pair;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +63,10 @@ class EvenChecker
     public void go()
     {
 //            checkNextIncrement(0, list.get(0).left);
+        Instant start = Instant.now();
         checkNextIncrement(0, ZERO);
+        Duration duration = Duration.between(start, Instant.now());
+        System.out.printf("Time taken (s): %d\n", duration.getSeconds());
     }
 
     public int getTestCount()

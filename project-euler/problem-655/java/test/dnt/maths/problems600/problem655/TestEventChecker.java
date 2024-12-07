@@ -21,6 +21,15 @@ public class TestEventChecker
     }
 
     @Test
+    public void test14CharPalindromes()
+    {
+        int length = 14;
+        EvenChecker checker = new EvenChecker(length, BD10000019);
+        checker.go();
+        assertThat(checker.getTestCount()).isEqualTo(5380839);
+    }
+
+    @Test
     public void showPalindromeCounts()
     {
         int palindromeCount = 0;
