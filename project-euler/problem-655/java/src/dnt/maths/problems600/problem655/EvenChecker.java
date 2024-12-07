@@ -3,14 +3,12 @@ package dnt.maths.problems600.problem655;
 import dnt.common.BigDecimalUtils;
 import dnt.common.Pair;
 
+import java.io.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-import static dnt.common.BigDecimalUtils.isWholeNumber;
 import static java.math.BigDecimal.ZERO;
 
 class EvenChecker
@@ -19,7 +17,6 @@ class EvenChecker
     private final int length;
     private final BigDecimal divisor;
 
-    private int testCount = 0;
     private int palindromeCount = 0;
 
     public EvenChecker(int length, BigDecimal divisor)
@@ -36,13 +33,42 @@ class EvenChecker
             list.add(new Pair(a.add(z), 0));
         }
         list.get(0).setRight(1);
-        list.forEach(item ->
-        {
+//        list.forEach(item ->
+//        {
 //                System.out.println("INFO:" + item);
-        });
+//        });
     }
 
-    private void checkNextIncrement(int listIndex, BigDecimal value)
+    public void loadOrWritePalindromes() throws IOException
+    {
+        loadOrWritePalindromes(0, ZERO);
+    }
+    public void loadOrWritePalindromes(int listIndex, BigDecimal value) throws IOException
+    {
+        File file = new File(String.format("palindromes.%dchars.txt", length));
+
+        if(file.exists())
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file)))
+            {
+                String line;
+                while(null != (line = reader.readLine()))
+                {
+                    palindromeCount++;
+                }
+            }
+        }
+        else
+        {
+            try (PrintWriter writer = new PrintWriter(file))
+            {
+                checkNextIncrement(writer, listIndex, value);
+            }
+            System.out.printf("INFO: File size: %d\n", file.length());
+        }
+    }
+
+    private void checkNextIncrement(PrintWriter writer, int listIndex, BigDecimal value)
     {
         if (listIndex == list.size())
         {
@@ -54,24 +80,20 @@ class EvenChecker
         for (int i = 0; i < 9; i++)
         {
             testValue = testValue.add(adder);
-            test(testValue);
+            writer.println(testValue);
+//            if(divisor != null)
+//            {
+//                test(testValue);
+//            }
+            palindromeCount++;
 
-            checkNextIncrement(listIndex + 1, testValue);
+            checkNextIncrement(writer, listIndex + 1, testValue);
         }
     }
 
     public void go()
     {
-//            checkNextIncrement(0, list.get(0).left);
-        Instant start = Instant.now();
-        checkNextIncrement(0, ZERO);
-        Duration duration = Duration.between(start, Instant.now());
-        System.out.printf("Time taken (s): %d\n", duration.getSeconds());
-    }
-
-    public int getTestCount()
-    {
-        return testCount;
+        checkNextIncrement(new NoopPrintWriter(), 0, ZERO);
     }
 
     public int getPalindromeCount()
@@ -88,6 +110,24 @@ class EvenChecker
             palindromeCount++;
 //                System.out.println(value);
         }
-        testCount++;
+    }
+
+    private static class NoopPrintWriter extends PrintWriter
+    {
+        public NoopPrintWriter()
+        {
+            super(new OutputStream()
+            {
+                @Override
+                public void write(int i)
+                {
+                }
+            });
+        }
+
+        @Override
+        public void println(String x)
+        {
+        }
     }
 }

@@ -29,7 +29,7 @@ public class TestOddChecker
         {
             EvenChecker checker = new EvenChecker(i, BD10000019);
             checker.go();
-            System.out.printf("Length: %d, Test Count: %d, Palindrome Count: %d, \n", i, checker.getTestCount(), checker.getPalindromeCount());
+            System.out.printf("Length: %d, Test Count: %d, Palindrome Count: %d, \n", i, checker.getPalindromeCount(), checker.getPalindromeCount());
             palindromeCount += checker.getPalindromeCount();
         }
         assertThat(palindromeCount).isEqualTo(10);
