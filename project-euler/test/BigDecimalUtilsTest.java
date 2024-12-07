@@ -1,11 +1,8 @@
-package dnt.maths;
-
-import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static dnt.maths.BigDecimalUtils.isWholeNumber;
+import static dnt.common.BigDecimalUtils.isWholeNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BigDecimalUtilsTest

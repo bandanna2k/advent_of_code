@@ -1,5 +1,6 @@
 package dnt.maths.problems600.problem655;
 
+import dnt.maths.problems600.problem655.EvenChecker;
 import org.junit.Test;
 
 import java.math.BigDecimal;

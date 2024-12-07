@@ -1,5 +1,6 @@
 package dnt.maths.problems600.problem655;
 
+import dnt.common.BigDecimalUtils;
 import dnt.common.Pair;
 
 import java.math.BigDecimal;
@@ -7,7 +8,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import static dnt.maths.BigDecimalUtils.isWholeNumber;
+import static dnt.common.BigDecimalUtils.isWholeNumber;
 import static java.math.BigDecimal.ZERO;
 
 class EvenChecker
@@ -77,7 +78,7 @@ class EvenChecker
     {
         BigDecimal divided = value.divide(divisor, 6, RoundingMode.DOWN);
         // System.out.printf("%s %d\n", value, String.valueOf(value).length());
-        if (isWholeNumber(divided))
+        if (BigDecimalUtils.isWholeNumber(divided))
         {
             palindromeCount++;
 //                System.out.println(value);

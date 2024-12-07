@@ -1,4 +1,4 @@
-package dnt.maths;
+package dnt.common;
 
 import java.math.BigDecimal;
 
