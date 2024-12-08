@@ -30,15 +30,15 @@ class Processor:
                     if letter == '.':
                         continue
 
-                    antennea = letterToAntennea.get('2')
+                    antennea = letterToAntennea.get(letter)
                     if antennea:
-                        letterToAntennea['2'] = antennea + [(row, col)]
+                        letterToAntennea[letter] = antennea + [(row, col)]
                     else:
-                        letterToAntennea['2'] = [(row, col)]
+                        letterToAntennea[letter] = [(row, col)]
 
                 row = row + 1
                 height = height + 1
-        print(letterToAntennea)
+        # print(letterToAntennea)
 
         print("Width:{}, Height:{}", width, height)
 
@@ -57,6 +57,9 @@ class Processor:
         #             print("Overlap {}".format(key))
         #             self.antinodes.pop(key)
 
+        # for key in self.antinodes:
+        #     print("{} {}".format(key, self.antinodes[key]))
+
         # Remove out of range
         for key in list(self.antinodes.keys()):
             pos = self.antinodes[key]
@@ -66,8 +69,8 @@ class Processor:
             elif pos[1] < 0 or pos[1] >= height:
                 del self.antinodes[key]
 
-        for key in self.antinodes:
-            print(key)
+        # for key in self.antinodes:
+        #     print("{} {}".format(key, self.antinodes[key]))
 
         self.answer = self.antinodes.__len__()
 
@@ -88,12 +91,14 @@ class Processor:
         a = antennea[i]
         b = antennea[j]
 
-        c = (a[0] - (b[0] - a[0]), a[1] - (b[1] - a[1]))
-        d = (b[0] + (b[0] - a[0]), b[1] + (b[1] - a[1]))
+        for k in range(0, 50):
 
-        # print("{} - {} {} - {}".format(c, a, b, d))
-        self.antinodes = self.antinodes | {"{},{}".format(c[0], c[1]): (c[0], c[1])}
-        self.antinodes = self.antinodes | {"{},{}".format(d[0], d[1]): (d[0], d[1])}
+            c = (a[0] - ((k * b[0]) - (k * a[0])), a[1] - ((k * b[1]) - (k * a[1])))
+            d = (b[0] + ((k * b[0]) - (k * a[0])), b[1] + ((k * b[1]) - (k * a[1])))
+
+            # print("{} - {} {} - {}".format(c, a, b, d))
+            self.antinodes = self.antinodes | {"{},{}".format(c[0], c[1]): (c[0], c[1])}
+            self.antinodes = self.antinodes | {"{},{}".format(d[0], d[1]): (d[0], d[1])}
 
         self.check(antennea, i + 1, j)
         self.check(antennea, i, j + 1)
