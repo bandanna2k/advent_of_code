@@ -23,7 +23,7 @@ public class TestMultiplierGrid
     }
 
     public int multiplier(int divisor, int source, int destination) {
-        int testSource = 25;
+        int testSource = source;
         int counter = 0;
         while ((testSource % 100) != destination) {
             counter++;
@@ -82,7 +82,7 @@ public class TestMultiplierGrid
         }
 
         public int multiplier(int divisor, int source, int destination) {
-            int testSource = 25;
+            int testSource = source;
             int counter = 0;
             while ((testSource % 100) != destination) {
                 counter++;
