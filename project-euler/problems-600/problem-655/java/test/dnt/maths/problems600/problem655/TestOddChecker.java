@@ -3,14 +3,11 @@ package dnt.maths.problems600.problem655;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
+import static dnt.maths.problems600.problem655.Constants.BD10000019;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestOddChecker
 {
-    private static final BigDecimal BD10000019 = new BigDecimal(10_000_019);
-
     @Test
     public void test9CharPalindromes()
     {

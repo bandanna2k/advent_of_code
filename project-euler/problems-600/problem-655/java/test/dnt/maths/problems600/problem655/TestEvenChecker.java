@@ -4,16 +4,14 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
 
-import static org.assertj.core.api.Assertions.*;
+import static dnt.maths.problems600.problem655.Constants.BD10000019;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestEventChecker
+public class TestEvenChecker
 {
-    private static final BigDecimal BD10000019 = new BigDecimal(10_000_019);
-
     @Test
     public void test10CharPalindromes()
     {
