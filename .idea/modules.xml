@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/advent_of_code.iml" filepath="$PROJECT_DIR$/advent_of_code.iml" />
       <module fileurl="file://$PROJECT_DIR$/project-euler/problem-655/java/java.iml" filepath="$PROJECT_DIR$/project-euler/problem-655/java/java.iml" />
       <module fileurl="file://$PROJECT_DIR$/project-euler/problem-655/problem-655.iml" filepath="$PROJECT_DIR$/project-euler/problem-655/problem-655.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project-euler/problems600/problems600.iml" filepath="$PROJECT_DIR$/project-euler/problems600/problems600.iml" />
       <module fileurl="file://$PROJECT_DIR$/project-euler/project-euler.iml" filepath="$PROJECT_DIR$/project-euler/project-euler.iml" />
     </modules>
   </component>

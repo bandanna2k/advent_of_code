@@ -1,17 +1,13 @@
 package dnt.maths.problems600.problem655;
 
-import dnt.maths.problems600.problem655.EvenChecker;
-import org.assertj.core.api.Assertions;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
 
-import static java.math.BigDecimal.ZERO;
 import static org.assertj.core.api.Assertions.*;
 
 public class TestEventChecker
