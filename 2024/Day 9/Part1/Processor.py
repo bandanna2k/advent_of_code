@@ -32,7 +32,7 @@ class Processor:
                 #print(expansion2)
 
                 print("Expanding large values")
-                expansion3 = self.expandLargeValues(expansion2)
+                expansion3 = expansion2
                 # print(expansion3)
 
                 freeIndices = []
@@ -56,6 +56,7 @@ class Processor:
 
                     expansion3[freeIndex] = expansion3[digitIndex]
                     expansion3[digitIndex] = '.'
+                print(expansion3)
 
                 print("Calculating checksum")
                 checksum = 0
@@ -64,8 +65,6 @@ class Processor:
                     if value == '.':
                         break
                     checksum = checksum + (i * int(value))
-
-                    assert checksum < (92349417108 + 1)
 
                 self.answer = checksum
                 break
