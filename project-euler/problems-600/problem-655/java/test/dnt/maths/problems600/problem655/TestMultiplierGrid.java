@@ -2,76 +2,61 @@ package dnt.maths.problems600.problem655;
 
 import org.junit.Test;
 
+import static dnt.maths.problems600.problem655.TestMultiplierGrid.MultiplierGrid.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class TestMultiplierGrid
 {
-    @Test
-    public void testMultiplierFrom18to19() {
-        final int divisor = 19;
-        final int source = 25;
-        int testSource = 25;
-        int counter = 0;
-        int destination = 26;
-        while ((testSource % 100) != destination) {
-            counter++;
-            testSource += divisor;
-        }
-        System.out.println(testSource);
-        System.out.println(counter);
-        System.out.println(source + (divisor * counter));
-    }
-
-    public int multiplier(int divisor, int source, int destination) {
-        int testSource = source;
-        int counter = 0;
-        while ((testSource % 100) != destination) {
-            counter++;
-            testSource += divisor;
-        }
-        return counter;
-    }
+    private MultiplierGrid grid = new MultiplierGrid();;
 
     @Test
-    public void testMultiplierGrid() {
-        MultiplierGrid grid = new MultiplierGrid();
-        System.out.println(grid);
-
+    public void testMultiplier()
+    {
+        assertThat(grid.grid[00][19]).isEqualTo(1);
         assertThat(grid.grid[58][77]).isEqualTo(1);
         assertThat(grid.grid[77][96]).isEqualTo(1);
         assertThat(grid.grid[96][15]).isEqualTo(1);
+
+        assertThat(multiplier(19, 19, 19)).isEqualTo(100);
+        assertThat(multiplier(19, 0, 0)).isEqualTo(100);
+
+        {
+            int divisor = 19;
+            int test = 10;
+            assertThat(test % divisor).isEqualTo(10);
+            for (int i = 0; i < 100; i++) {
+                test = test + divisor;
+            }
+            assertThat(test % divisor).isEqualTo(10);
+        }
+    }
+
+    @Test
+    public void testMultiplierGrid()
+    {
+        for (int source = 0; source < grid.sourceWidth; source++)
+        {
+            for (int destination = 0; destination < grid.destinationHeight; destination++)
+            {
+                int multiplier = grid.grid[source][destination];
+                int result = source + (DIVISOR * multiplier);
+                result = result % 100;
+                assertThat(result)
+                        .describedAs(String.format("Source:%d, Dest:%d, Result:%d", source, destination, result))
+                        .isEqualTo(destination);
+            }
+        }
     }
 
     public static class MultiplierGrid {
-        private static final int DIVISOR = 19;
+        public static final int DIVISOR = 19;
 
-        private static int sourceWidth = 100;
-        private static int destinationHeight = 100;
+        private int sourceWidth = 100;
+        private int destinationHeight = 100;
         int[][] grid = new int[sourceWidth][destinationHeight];
 
-        public MultiplierGrid() {
-//            int cells = sourceWidth * destinationHeight;
-//
-//            int counter = 0;
-//            int multiplier = 0;
-//
-//            int source = 0;
-//            int destination = 0;
-//            while(counter++ < cells)
-//            {
-//                source = source + DIVISOR;
-//                multiplier = (multiplier + 1) % DIVISOR;
-//
-//                if(source >= destinationHeight)
-//                {
-//                    source = source % sourceWidth;
-//                    destination = (destination + 1) % destinationHeight;
-//                }
-//
-//                assert grid[source][destination] == 0;
-//                grid[source][destination] = multiplier;
-//            }
-
+        public MultiplierGrid()
+        {
             for (int source = 0; source < grid.length; source++)
             {
                 for (int destination = 0; destination < grid[0].length; destination++)
@@ -81,10 +66,11 @@ public class TestMultiplierGrid
             }
         }
 
-        public int multiplier(int divisor, int source, int destination) {
-            int testSource = source;
-            int counter = 0;
-            while ((testSource % 100) != destination) {
+        public static int multiplier(int divisor, int source, int destination) {
+            int testSource = source + divisor;
+            int counter = 1;
+            while ((testSource % 100) != destination)
+            {
                 counter++;
                 testSource += divisor;
             }
