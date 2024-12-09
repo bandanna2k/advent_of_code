@@ -10,8 +10,16 @@ public class TestMultiplierGrid
     private MultiplierGrid grid = new MultiplierGrid();;
 
     @Test
+    public void testToString()
+    {
+        System.out.println(grid);
+    }
+
+    @Test
     public void testMultiplier()
     {
+        assertThat(grid.grid[19][10]).isEqualTo(89);
+        assertThat(grid.grid[19][01]).isEqualTo(78);
         assertThat(grid.grid[00][19]).isEqualTo(1);
         assertThat(grid.grid[58][77]).isEqualTo(1);
         assertThat(grid.grid[77][96]).isEqualTo(1);
