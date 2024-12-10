@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
-import static dnt.maths.problems600.problem655.MultiplierGrid.*;
 import static org.assertj.core.api.Assertions.*;
 
 @RunWith(Enclosed.class)
@@ -12,7 +11,7 @@ public class TestMultiplierGrid
 {
     public static class TestMultiplier2Chars
     {
-        private BruteForceMultiplierGrid grid = new BruteForceMultiplierGrid(2, 19);
+        private MultiplierGridImpl grid = new MultiplierGridImpl(2, 19);
 
         @Test
         public void testToString()
@@ -64,7 +63,7 @@ public class TestMultiplierGrid
 
     public static class TestMultiplier3Chars
     {
-        private BruteForceMultiplierGrid grid = new BruteForceMultiplierGrid(3, 19);
+        private MultiplierGridImpl grid = new MultiplierGridImpl(3, 19);
 
         @Test
         public void testToString()

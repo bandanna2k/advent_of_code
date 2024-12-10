@@ -1,30 +1,40 @@
 package dnt.maths.problems600.problem655;
 
-public class BruteForceMultiplierGrid implements MultiplierGrid
-{
+import static java.lang.Math.*;
 
+public class MultiplierGridImpl implements MultiplierGrid
+{
     public final int divisor;
     public final int sourceWidth;
     public final int destinationHeight;
     public final int[][] grid;
 
     private final int tens; // Bad name
+    private final String format;
 
-    public BruteForceMultiplierGrid(int charsToMultiply, int divisor)
+    public MultiplierGridImpl(int charsToMultiply, int divisor)
     {
         assert charsToMultiply > 1;
         this.divisor = divisor;
 
-        tens = (int) Math.pow(10, charsToMultiply);
+        tens = (int) pow(10, charsToMultiply);
         this.sourceWidth = tens;
         this.destinationHeight = tens;
+        this.format = "%0" + charsToMultiply + "d ";
+
 
         grid = new int[sourceWidth][destinationHeight];
-        for (int source = 0; source < grid.length; source++)
+        for (int i = 0; i < sourceWidth; i++)
         {
-            for (int destination = 0; destination < grid[0].length; destination++)
+            int value = tens;
+            int source = i;
+            int destination = i;
+            grid[source][destination] = value;
+            for (int j = 1; j < destinationHeight; j++)
             {
-                grid[source][destination] = multiplier(divisor, source, destination);
+                value = (value + 1) % tens;
+                destination = (destination + divisor) % tens;
+                grid[source][destination] = value;
             }
         }
     }
@@ -52,8 +62,9 @@ public class BruteForceMultiplierGrid implements MultiplierGrid
 
         int destinationCounter = 0;
         sb.append("     ");
-        for (int i = 0; i < grid.length; i++) {
-            sb.append(String.format("%02d ", destinationCounter++));
+        for (int i = 0; i < grid.length; i++)
+        {
+            sb.append(String.format(format, destinationCounter++));
         }
         sb.append("\n");
 
@@ -65,9 +76,9 @@ public class BruteForceMultiplierGrid implements MultiplierGrid
 
         int sourceCounter = 0;
         for (int i = 0; i < grid.length; i++) {
-            sb.append(String.format("%02d | ", sourceCounter++));
+            sb.append(String.format(format, sourceCounter++) + "| ");
             for (int j = 0; j < grid[i].length; j++) {
-                sb.append(String.format("%02d ", grid[i][j]));
+                sb.append(String.format(format, grid[i][j]));
             }
             sb.append("\n");
         }
