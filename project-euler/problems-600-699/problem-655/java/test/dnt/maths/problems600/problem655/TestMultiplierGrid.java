@@ -12,7 +12,7 @@ public class TestMultiplierGrid
 {
     public static class TestMultiplier2Chars
     {
-        private MultiplierGrid grid = new MultiplierGrid(2, 19);
+        private BruteForceMultiplierGrid grid = new BruteForceMultiplierGrid(2, 19);
 
         @Test
         public void testToString()
@@ -23,12 +23,12 @@ public class TestMultiplierGrid
         @Test
         public void testMultiplier()
         {
-            assertThat(grid.grid[19][10]).isEqualTo(89);
-            assertThat(grid.grid[19][01]).isEqualTo(78);
-            assertThat(grid.grid[00][19]).isEqualTo(1);
-            assertThat(grid.grid[58][77]).isEqualTo(1);
-            assertThat(grid.grid[77][96]).isEqualTo(1);
-            assertThat(grid.grid[96][15]).isEqualTo(1);
+            assertThat(grid.multiplier(19, 10)).isEqualTo(89);
+            assertThat(grid.multiplier(19, 01)).isEqualTo(78);
+            assertThat(grid.multiplier(00, 19)).isEqualTo(1);
+            assertThat(grid.multiplier(58, 77)).isEqualTo(1);
+            assertThat(grid.multiplier(77, 96)).isEqualTo(1);
+            assertThat(grid.multiplier(96, 15)).isEqualTo(1);
 
             assertThat(grid.multiplier(19, 19, 19)).isEqualTo(100);
             assertThat(grid.multiplier(19, 0, 0)).isEqualTo(100);
@@ -64,7 +64,7 @@ public class TestMultiplierGrid
 
     public static class TestMultiplier3Chars
     {
-        private MultiplierGrid grid = new MultiplierGrid(3, 19);
+        private BruteForceMultiplierGrid grid = new BruteForceMultiplierGrid(3, 19);
 
         @Test
         public void testToString()
@@ -75,16 +75,16 @@ public class TestMultiplierGrid
         @Test
         public void testMultiplier()
         {
-            assertThat(grid.grid[19][10]).isEqualTo(89);
-            assertThat(grid.grid[19][01]).isEqualTo(78);
+            assertThat(grid.grid[19][10]).isEqualTo(789);
+            assertThat(grid.grid[19][01]).isEqualTo(578);
             assertThat(grid.grid[00][19]).isEqualTo(1);
             assertThat(grid.grid[58][77]).isEqualTo(1);
             assertThat(grid.grid[77][96]).isEqualTo(1);
-            assertThat(grid.grid[96][15]).isEqualTo(1);
+            assertThat(grid.grid[96][15]).isEqualTo(101);
             assertThat(grid.grid[158][177]).isEqualTo(1);
 
-            assertThat(grid.multiplier(19, 19, 19)).isEqualTo(100);
-            assertThat(grid.multiplier(19, 0, 0)).isEqualTo(100);
+            assertThat(grid.multiplier(19, 19, 19)).isEqualTo(1000);
+            assertThat(grid.multiplier(19, 0, 0)).isEqualTo(1000);
 
             {
                 int divisor = 19;
@@ -106,7 +106,7 @@ public class TestMultiplierGrid
                 {
                     int multiplier = grid.grid[source][destination];
                     int result = source + (grid.divisor * multiplier);
-                    result = result % 100;
+                    result = result % grid.sourceWidth;
                     assertThat(result)
                             .describedAs(String.format("Source:%d, Dest:%d, Result:%d", source, destination, result))
                             .isEqualTo(destination);
