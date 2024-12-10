@@ -8,6 +8,8 @@ import java.time.Instant;
 import static dnt.common.BigDecimalUtils.firstDivisibleNumberAfter;
 import static dnt.common.BigDecimalUtils.isDivisible;
 import static dnt.common.StringUtils.isPalindrome;
+import static java.lang.Math.floorMod;
+import static java.lang.Math.max;
 
 public class CheckerOptimised implements Checker
 {
@@ -51,16 +53,13 @@ public class CheckerOptimised implements Checker
     @Override
     public void go()
     {
-        System.out.printf("INFO:%s:Start go\n", Instant.now());
-
-        System.out.printf("INFO:%s:First divisible:%s\n", Instant.now(), firstDivisible);
-
         String nextString = firstDivisible.toString();
         while(true)
         {
             int a = Integer.parseInt(swap2chars(nextString));
             int d = Integer.parseInt(nextString.substring(length - 2, length));
-            int b = Integer.parseInt(nextString.substring(divisorLength, divisorLength + 1));
+
+            int b = Integer.parseInt(nextString.substring(divisorLength - 1, divisorLength));
 
             int cIndex = length - divisorLength;
             int c = Integer.parseInt(nextString.substring(cIndex, cIndex + 1));
@@ -73,13 +72,14 @@ public class CheckerOptimised implements Checker
                 if(isPalindrome(nextString))
                 {
                     assert isDivisible(new BigDecimal(nextString), divisor);
-                    System.out.printf("INFO:%s: Horah, Palindrome found. %s\n", Instant.now(), nextString);
+//                    System.out.printf("INFO:%s: Horah, Palindrome found. %s\n", Instant.now(), nextString);
                     this.palindromeCount++;
                 }
             }
 
-            int multiplier = multiplierGrid.multiplier(d, a);
-            BigDecimal MULTIPLIER = new BigDecimal(multiplier);
+            int multiplierC = max(1, floorMod(c - b, 10));
+            int multiplierD = multiplierGrid.multiplier(d, a);
+            BigDecimal MULTIPLIER = new BigDecimal(multiplierD).multiply(new BigDecimal(multiplierC));
             BigDecimal next = new BigDecimal(nextString).add(divisor.multiply(MULTIPLIER));
             nextString = next.toString();
             if(nextString.length() > length)

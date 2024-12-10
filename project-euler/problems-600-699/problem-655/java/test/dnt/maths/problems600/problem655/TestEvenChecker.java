@@ -40,13 +40,27 @@ public class TestEvenChecker
         assertThat(checker.getPalindromeCount()).isEqualTo(8);
     }
 
+    @Test // Not getting right results
+    public void test18CharPalindromes()
+    {
+        int length = 18;
+        Checker checker = new CheckByPalindromeEvenLength(length, BD10000019);
+        checker.go();
+        assertThat(checker.getPalindromeCount()).isEqualTo(101);
+    }
+
     @Test
     public void test16CharPalindromesOptimised()
     {
+        Instant start, now;
+        System.out.printf("INFO:%s:Start go\n", start = Instant.now());
+
         int length = 16;
         Checker checker = new CheckerOptimised(length, BD10000019, new BigDecimal("1000000009996409"));
         checker.go();
         assertThat(checker.getPalindromeCount()).isEqualTo(8);
+
+        System.out.printf("INFO:%s:End %d\n", now = Instant.now(), Duration.between(start, now).toMillis());
     }
 
     @Test
@@ -55,7 +69,7 @@ public class TestEvenChecker
         int length = 18;
         Checker checker = new CheckerOptimised(length, BD10000019, new BigDecimal("100000000009639019"));
         checker.go();
-        assertThat(checker.getPalindromeCount()).isEqualTo(7);
+        assertThat(checker.getPalindromeCount()).isEqualTo(101);
     }
 
     @Test
