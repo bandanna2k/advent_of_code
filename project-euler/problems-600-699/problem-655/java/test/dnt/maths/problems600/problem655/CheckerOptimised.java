@@ -25,7 +25,6 @@ public class CheckerOptimised implements Checker
     public CheckerOptimised(int length, BigDecimal divisor, BigDecimal firstDivisible)
     {
         assert BigDecimalUtils.isDivisible(firstDivisible, divisor);
-        assert length == firstDivisible.toString().length();
         this.length = length;
         this.divisor = divisor;
         this.divisorLength = divisor.toString().length();
@@ -70,11 +69,6 @@ public class CheckerOptimised implements Checker
 
             if(a == d && b == c)
             {
-                if(nextString.length() > length)
-                {
-                    break;
-                }
-
 //                System.out.printf("INFO:%s: Check is palindrome\n", Instant.now());
                 if(isPalindrome(nextString))
                 {
@@ -88,6 +82,10 @@ public class CheckerOptimised implements Checker
             BigDecimal MULTIPLIER = new BigDecimal(multiplier);
             BigDecimal next = new BigDecimal(nextString).add(divisor.multiply(MULTIPLIER));
             nextString = next.toString();
+            if(nextString.length() > length)
+            {
+                break;
+            }
         }
     }
 

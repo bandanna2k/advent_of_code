@@ -50,6 +50,15 @@ public class TestEvenChecker
     }
 
     @Test
+    public void test18CharPalindromesOptimised()
+    {
+        int length = 18;
+        Checker checker = new CheckerOptimised(length, BD10000019, new BigDecimal("100000000009639019"));
+        checker.go();
+        assertThat(checker.getPalindromeCount()).isEqualTo(7);
+    }
+
+    @Test
     public void testLoadTimings14() throws IOException
     {
         {
