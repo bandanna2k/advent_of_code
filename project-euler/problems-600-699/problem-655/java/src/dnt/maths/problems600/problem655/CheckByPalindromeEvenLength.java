@@ -13,6 +13,7 @@ import static java.math.BigDecimal.ZERO;
 
 class CheckByPalindromeEvenLength implements Checker
 {
+    public static final int DIGITS_TO_CHECK = 10;
     private final List<Pair<BigDecimal, Integer>> list;
     private final int length;
     private final BigDecimal divisor;
@@ -77,7 +78,7 @@ class CheckByPalindromeEvenLength implements Checker
 
         BigDecimal adder = list.get(listIndex).getLeft();
         BigDecimal testValue = value;
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < DIGITS_TO_CHECK; i++)
         {
             checkNextIncrement(writer, listIndex + 1, testValue);
 

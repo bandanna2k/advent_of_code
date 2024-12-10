@@ -37,7 +37,7 @@ public class TestEvenChecker
         int length = 16;
         Checker checker = new CheckByPalindromeEvenLength(length, BD10000019);
         checker.go();
-        assertThat(checker.getPalindromeCount()).isEqualTo(7);
+        assertThat(checker.getPalindromeCount()).isEqualTo(8);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class TestEvenChecker
         int length = 16;
         Checker checker = new CheckerOptimised(length, BD10000019, new BigDecimal("1000000009996409"));
         checker.go();
-        assertThat(checker.getPalindromeCount()).isEqualTo(7);
+        assertThat(checker.getPalindromeCount()).isEqualTo(8);
     }
 
     @Test
