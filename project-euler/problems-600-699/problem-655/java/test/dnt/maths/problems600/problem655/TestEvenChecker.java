@@ -4,6 +4,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -16,7 +17,7 @@ public class TestEvenChecker
     public void test10CharPalindromes()
     {
         int length = 10;
-        EvenChecker checker = new EvenChecker(length, BD10000019);
+        Checker checker = new CheckByPalindromeEvenLength(length, BD10000019);
         checker.go();
         assertThat(checker.getPalindromeCount()).isEqualTo(66429);
     }
@@ -25,16 +26,34 @@ public class TestEvenChecker
     public void test14CharPalindromes()
     {
         int length = 14;
-        EvenChecker checker = new EvenChecker(length, BD10000019);
+        Checker checker = new CheckByPalindromeEvenLength(length, BD10000019);
         checker.go();
         assertThat(checker.getPalindromeCount()).isEqualTo(5380839);
+    }
+
+    @Test // 5 Seconds
+    public void test16CharPalindromes()
+    {
+        int length = 16;
+        Checker checker = new CheckByPalindromeEvenLength(length, BD10000019);
+        checker.go();
+        assertThat(checker.getPalindromeCount()).isEqualTo(7);
+    }
+
+    @Test
+    public void test16CharPalindromesOptimised()
+    {
+        int length = 16;
+        Checker checker = new CheckerOptimised(length, BD10000019, new BigDecimal("1000000009996409"));
+        checker.go();
+        assertThat(checker.getPalindromeCount()).isEqualTo(7);
     }
 
     @Test
     public void testLoadTimings14() throws IOException
     {
         {
-            EvenChecker checker = new EvenChecker(14, BD10000019);
+            CheckByPalindromeEvenLength checker = new CheckByPalindromeEvenLength(14, BD10000019);
 
             Instant start = Instant.now();
             checker.loadOrWritePalindromes();
@@ -45,7 +64,7 @@ public class TestEvenChecker
             assertThat(checker.getPalindromeCount()).isEqualTo(5380839);
         }
         {
-            EvenChecker checker = new EvenChecker(14, BD10000019);
+            CheckByPalindromeEvenLength checker = new CheckByPalindromeEvenLength(14, BD10000019);
 
             Instant start = Instant.now();
             checker.loadOrWritePalindromes();
@@ -61,7 +80,7 @@ public class TestEvenChecker
     public void testDurationOfPalindromeCountX()
     {
         Instant start = Instant.now();
-        EvenChecker checker = new EvenChecker(20, null);
+        Checker checker = new CheckByPalindromeEvenLength(20, null);
         checker.go();
 
         long testCount = checker.getPalindromeCount();
@@ -81,7 +100,7 @@ public class TestEvenChecker
         int palindromeCount = 0;
         for (int i = String.valueOf(BD10000019).length(); i < 32; i += 2)
         {
-            EvenChecker checker = new EvenChecker(i, BD10000019);
+            Checker checker = new CheckByPalindromeEvenLength(i, BD10000019);
             checker.go();
             System.out.printf("Length: %d, Test Count: %d, Palindrome Count: %d, \n", i, checker.getPalindromeCount(), checker.getPalindromeCount());
             palindromeCount += checker.getPalindromeCount();

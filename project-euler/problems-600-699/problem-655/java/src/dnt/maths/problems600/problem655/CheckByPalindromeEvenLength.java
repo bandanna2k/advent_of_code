@@ -11,7 +11,7 @@ import java.util.List;
 
 import static java.math.BigDecimal.ZERO;
 
-class EvenChecker
+class CheckByPalindromeEvenLength implements Checker
 {
     private final List<Pair<BigDecimal, Integer>> list;
     private final int length;
@@ -19,7 +19,7 @@ class EvenChecker
 
     private int palindromeCount = 0;
 
-    public EvenChecker(int length, BigDecimal divisor)
+    public CheckByPalindromeEvenLength(int length, BigDecimal divisor)
     {
         this.divisor = divisor;
         assert length % 2 == 0;
@@ -79,15 +79,11 @@ class EvenChecker
         BigDecimal testValue = value;
         for (int i = 0; i < 9; i++)
         {
+            checkNextIncrement(writer, listIndex + 1, testValue);
+
             testValue = testValue.add(adder);
             writer.println(testValue);
-//            if(divisor != null)
-//            {
-//                test(testValue);
-//            }
-            palindromeCount++;
-
-            checkNextIncrement(writer, listIndex + 1, testValue);
+            test(testValue);
         }
     }
 
@@ -96,6 +92,7 @@ class EvenChecker
         checkNextIncrement(new NoopPrintWriter(), 0, ZERO);
     }
 
+    @Override
     public int getPalindromeCount()
     {
         return palindromeCount;
@@ -103,12 +100,12 @@ class EvenChecker
 
     private void test(BigDecimal value)
     {
-        BigDecimal divided = value.divide(divisor, 6, RoundingMode.DOWN);
-        // System.out.printf("%s %d\n", value, String.valueOf(value).length());
+        BigDecimal divided = value.divide(divisor, 10, RoundingMode.DOWN);
         if (BigDecimalUtils.isWholeNumber(divided))
         {
+            System.out.println(value);
             palindromeCount++;
-//                System.out.println(value);
+            assert BigDecimalUtils.isDivisible(value, divisor);
         }
     }
 

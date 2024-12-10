@@ -9,7 +9,7 @@ import java.util.List;
 
 import static java.math.BigDecimal.ZERO;
 
-class OddChecker
+class CheckByPalindromeOddLength implements Checker
 {
     private final List<Pair<BigDecimal, Integer>> list;
     private final int length;
@@ -18,7 +18,7 @@ class OddChecker
     private int testCount = 0;
     private int palindromeCount = 0;
 
-    public OddChecker(int length, BigDecimal divisor)
+    public CheckByPalindromeOddLength(int length, BigDecimal divisor)
     {
         this.divisor = divisor;
         assert length % 2 == 0;
