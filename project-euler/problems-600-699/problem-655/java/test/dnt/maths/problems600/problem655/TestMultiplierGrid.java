@@ -9,6 +9,17 @@ import static org.assertj.core.api.Assertions.*;
 @RunWith(Enclosed.class)
 public class TestMultiplierGrid
 {
+    public static class TestMultiplier1Char
+    {
+        private MultiplierGridImpl grid = new MultiplierGridImpl(1, 1);
+
+        @Test
+        public void testToString()
+        {
+            System.out.println(grid);
+        }
+
+    }
     public static class TestMultiplier2Chars
     {
         private MultiplierGridImpl grid = new MultiplierGridImpl(2, 19);

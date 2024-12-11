@@ -8,8 +8,10 @@ import java.time.Instant;
 import static dnt.common.BigDecimalUtils.firstDivisibleNumberAfter;
 import static dnt.common.BigDecimalUtils.isDivisible;
 import static dnt.common.StringUtils.isPalindrome;
+import static java.lang.Math.floorMod;
+import static java.lang.Math.max;
 
-public class CheckerOptimised20Plus implements Checker
+public class CheckerOptimised24Plus implements Checker
 {
     private final int length;
     private final BigDecimal divisor;
@@ -18,11 +20,11 @@ public class CheckerOptimised20Plus implements Checker
     private final BigDecimal firstDivisible;
     private int palindromeCount = 0;
 
-    public CheckerOptimised20Plus(int length, BigDecimal divisor)
+    public CheckerOptimised24Plus(int length, BigDecimal divisor)
     {
         this(length, divisor, firstDivisibleNumberAfter(new BigDecimal(getStartValue(length)), divisor.intValue()));
     }
-    public CheckerOptimised20Plus(int length, BigDecimal divisor, BigDecimal firstDivisible)
+    public CheckerOptimised24Plus(int length, BigDecimal divisor, BigDecimal firstDivisible)
     {
         assert BigDecimalUtils.isDivisible(firstDivisible, divisor);
         assert length >= 20;
@@ -55,13 +57,11 @@ public class CheckerOptimised20Plus implements Checker
         String nextString = firstDivisible.toString();
         while(true)
         {
-            int a = Integer.parseInt(new String(new char[] { nextString.charAt(1), nextString.charAt(0) } ));   // Swap around
-            int d = Integer.parseInt(nextString.substring(length - 2, length));
+            int a = Integer.parseInt(new String(new char[] { nextString.charAt(1), nextString.charAt(0) } )); // Swapped
+            int d = Integer.parseInt(new String(new char[] { nextString.charAt(length - 2), nextString.charAt(length - 1) } ));
 
-            int b = Integer.parseInt(new String(new char[] { nextString.charAt(divisorLength - 2), nextString.charAt(divisorLength - 1) } ));
-
-            int cIndex = length - divisorLength;
-            int c = Integer.parseInt(new String(new char[] { nextString.charAt(cIndex), nextString.charAt(cIndex - 1) } )); // Swap around
+            int b = Integer.parseInt(String.valueOf(nextString.charAt(divisorLength - 1)));
+            int c = Integer.parseInt(String.valueOf(nextString.charAt(length - divisorLength))); // Swapped
 //            System.out.printf("INFO:%s: %s\n", Instant.now(), nextString);
 //            System.out.printf("INFO:%s: A:%d, B:%d, C:%d, D:%d\n", Instant.now(), a, b, c, d);
 
@@ -76,10 +76,10 @@ public class CheckerOptimised20Plus implements Checker
                 }
             }
 
-            int multiplierC = multiplierGrid.multiplier(c, b);
+            int multiplierC = floorMod(c - b, 10);
             int multiplierD = multiplierGrid.multiplier(d, a);
             BigDecimal MULTIPLIER = new BigDecimal(multiplierD);
-//            MULTIPLIER = MULTIPLIER.multiply(new BigDecimal(multiplierC));
+            MULTIPLIER = MULTIPLIER.add(new BigDecimal(multiplierC * 10_000_000));
             BigDecimal next = new BigDecimal(nextString).add(divisor.multiply(MULTIPLIER));
             nextString = next.toString();
             if(nextString.length() > length)
@@ -87,10 +87,5 @@ public class CheckerOptimised20Plus implements Checker
                 break;
             }
         }
-    }
-
-    private static String swap2chars(String input)
-    {
-        return new String(new char[] { input.charAt(1), input.charAt(0) });
     }
 }

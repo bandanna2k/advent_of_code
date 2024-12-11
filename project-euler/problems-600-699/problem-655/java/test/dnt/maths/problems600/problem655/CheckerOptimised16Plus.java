@@ -26,7 +26,7 @@ public class CheckerOptimised16Plus implements Checker
     }
     public CheckerOptimised16Plus(int length, BigDecimal divisor, BigDecimal firstDivisible)
     {
-        assert length > 16;
+        assert length >= 16;
         assert BigDecimalUtils.isDivisible(firstDivisible, divisor);
         this.length = length;
         this.divisor = divisor;
@@ -57,13 +57,11 @@ public class CheckerOptimised16Plus implements Checker
         String nextString = firstDivisible.toString();
         while(true)
         {
-            int a = Integer.parseInt(swap2chars(nextString));
-            int d = Integer.parseInt(nextString.substring(length - 2, length));
+            int a = Integer.parseInt(new String(new char[] { nextString.charAt(1), nextString.charAt(0) } )); // Swapped
+            int d = Integer.parseInt(new String(new char[] { nextString.charAt(length - 2), nextString.charAt(length - 1) } ));
 
-            int b = Integer.parseInt(nextString.substring(divisorLength - 1, divisorLength));
-
-            int cIndex = length - divisorLength;
-            int c = Integer.parseInt(nextString.substring(cIndex, cIndex + 1));
+            int b = Integer.parseInt(String.valueOf(nextString.charAt(divisorLength - 1)));
+            int c = Integer.parseInt(String.valueOf(nextString.charAt(length - divisorLength))); // Swapped
 //            System.out.printf("INFO:%s: %s\n", Instant.now(), nextString);
 //            System.out.printf("INFO:%s: A:%d, B:%d, C:%d, D:%d\n", Instant.now(), a, b, c, d);
 
@@ -78,9 +76,10 @@ public class CheckerOptimised16Plus implements Checker
                 }
             }
 
-            int multiplierC = max(1, floorMod(c - b, 10));
+            int multiplierC = max(1, floorMod(b - c, 10));
             int multiplierD = multiplierGrid.multiplier(d, a);
-            BigDecimal MULTIPLIER = new BigDecimal(multiplierD).multiply(new BigDecimal(multiplierC));
+            BigDecimal MULTIPLIER = new BigDecimal(multiplierD);
+//            MULTIPLIER = MULTIPLIER.add(new BigDecimal(multiplierC));
             BigDecimal next = new BigDecimal(nextString).add(divisor.multiply(MULTIPLIER));
             nextString = next.toString();
             if(nextString.length() > length)

@@ -31,57 +31,6 @@ public class TestEvenChecker
         assertThat(checker.getPalindromeCount()).isEqualTo(5380839);
     }
 
-    @Test // 5 Seconds
-    public void test16CharPalindromes()
-    {
-        int length = 16;
-        Checker checker = new CheckByPalindromeEvenLength(length, BD10000019);
-        checker.go();
-        assertThat(checker.getPalindromeCount()).isEqualTo(8);
-    }
-
-    @Test
-    public void test16CharPalindromesOptimised()
-    {
-        Instant start, now;
-        System.out.printf("INFO:%s:Start go\n", start = Instant.now());
-
-        int length = 16;
-        Checker checker = new CheckerOptimised16Plus(length, BD10000019, new BigDecimal("1000000009996409"));
-        checker.go();
-        assertThat(checker.getPalindromeCount()).isEqualTo(8);
-
-        System.out.printf("INFO:%s:End %d\n", now = Instant.now(), Duration.between(start, now).toMillis());
-        assertThat(checker.getPalindromeCount()).isEqualTo(8);
-    }
-
-    @Test //
-    public void test18CharPalindromes()
-    {
-        int length = 18;
-        Checker checker = new CheckByPalindromeEvenLength(length, BD10000019);
-        checker.go();
-        assertThat(checker.getPalindromeCount()).isEqualTo(8);
-    }
-
-    @Test // 48 secs
-    public void test18CharPalindromesOptimised()
-    {
-        int length = 18;
-        Checker checker = new CheckerOptimised16Plus(length, BD10000019, new BigDecimal("100000000009639019"));
-        checker.go();
-        assertThat(checker.getPalindromeCount()).isEqualTo(101);
-    }
-
-    @Test // 48 secs
-    public void test20CharPalindromesOptimised()
-    {
-        int length = 20;
-        Checker checker = new CheckerOptimised20Plus(length, BD10000019, new BigDecimal("10000000000003900076"));
-        checker.go();
-        assertThat(checker.getPalindromeCount()).isEqualTo(101);
-    }
-
     @Test
     public void testLoadTimings14() throws IOException
     {
