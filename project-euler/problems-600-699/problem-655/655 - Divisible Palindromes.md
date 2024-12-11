@@ -7,10 +7,34 @@ How many palindromes less than 10^32 are divisible by 10,000,019?
 
 ## Strategy
 
-8-15 Chars (Brute force)
-16-32 Chars
-
-
+| Chars | Strategy     | Palindrome Count | Strategies | Time Taken |
+|-------|--------------|------------------|------------|------------|
+| 8     | Brute Force  | 0                |            | 0.02 secs  |
+| 9     | "            | 0                |            | 0.2 secs   |
+| 10    | "            | 0                |            | 0.15 secs  |
+| 11    | "            | 0                |            | 0.9 secs   |
+| 12    | "            | 0                |            | 1.2 secs   |
+| 13    | "            | 6 (need 2nd)     |            | 4.2 secs   |
+| 14    | "            | 0                |            | 13 secs    |
+| 15    | "            | 48 (need 2nd)    |            | 43 secs    |
+| 16    | Optimised v1 | 8                | 2          | 1 sec      |
+| 17    | Brute Force  | 482 (need 2nd)   |            | 6 mins     |
+| 18    | Optimised v1 | 101              | 2          | 48 secs    |
+| 19    | "            |                  |            |            |
+| 20    | "            | 10               |            | 52 secs    |
+| 21    | "            |                  |            |            |
+| 22    | "            |                  |            |            |
+| 23    | "            |                  |            |            |
+| 24    | ??????       |                  |            |            |
+| 25    | "            |                  |            |            |
+| 26    | "            |                  |            |            |
+| 27    | "            |                  |            |            |
+| 28    | "            |                  |            |            |
+| 29    | "            |                  |            |            |
+| 30    | "            |                  |            |            |
+| 31    | "            |                  |            |            |
+| 32    | "            |                  |            |            |
+ 
 ## Questions
 
 Do I need a map mapping for multipliers for all numbers from 10 000 019 to ???
@@ -38,14 +62,6 @@ TODO List 11 char palindromes
 
 10000000001
 
-
-Length: 8, Test Count: 7380, Palindrome Count: 0,
-Length: 10, Test Count: 66429, Palindrome Count: 0,
-Length: 12, Test Count: 597870, Palindrome Count: 0,
-Length: 14, Test Count: 5380839, Palindrome Count: 5,
-Length: 16, Test Count: 48427560, Palindrome Count: 53,
-Length: 18, Test Count: 435848049, Palindrome Count: 411,
-Length: 20, Test Count: -372334846, Palindrome Count: 3677,
 
 
 
