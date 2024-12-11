@@ -7,12 +7,13 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.math.BigDecimal.ONE;
 import static java.math.BigDecimal.ZERO;
 
 class CheckByPalindromeOddLength implements Checker
 {
-    private final List<Pair<BigDecimal, Integer>> list;
-    private final int length;
+    public static final int COUNT_OF_DIGITS = 9;
+    private final List<BigDecimal> adders;
     private final BigDecimal divisor;
 
     private int testCount = 0;
@@ -21,33 +22,29 @@ class CheckByPalindromeOddLength implements Checker
     public CheckByPalindromeOddLength(int length, BigDecimal divisor)
     {
         this.divisor = divisor;
-        assert length % 2 == 0;
-        this.length = length;
-        list = new ArrayList<>();
+        assert length % 2 == 1;
+        adders = new ArrayList<>();
         final int size = length - 1;
-        for (int i = 0; i <= (size / 2); i++)
+        int i;
+        for (i = 0; i <= ((size - 1) / 2); i++)
         {
             BigDecimal a = new BigDecimal(10).pow(i);
             BigDecimal z = new BigDecimal(10).pow(size - i);
-            list.add(new Pair(a.add(z), 0));
+            adders.add(a.add(z));
         }
-        list.get(0).setRight(1);
-        list.forEach(item ->
-        {
-//                System.out.println("INFO:" + item);
-        });
+        adders.add(new BigDecimal(10).pow(size - i));
     }
 
     private void checkNextIncrement(int listIndex, BigDecimal value)
     {
-        if (listIndex == list.size())
+        if (listIndex == adders.size())
         {
             return;
         }
 
-        BigDecimal adder = list.get(listIndex).getLeft();
+        BigDecimal adder = adders.get(listIndex);
         BigDecimal testValue = value;
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < COUNT_OF_DIGITS; i++)
         {
             testValue = testValue.add(adder);
             test(testValue);
@@ -58,8 +55,7 @@ class CheckByPalindromeOddLength implements Checker
 
     public void go()
     {
-//            checkNextIncrement(0, list.get(0).left);
-        checkNextIncrement(0, ZERO);
+        checkNextIncrement(0, adders.get(0));
     }
 
     public int getTestCount()
