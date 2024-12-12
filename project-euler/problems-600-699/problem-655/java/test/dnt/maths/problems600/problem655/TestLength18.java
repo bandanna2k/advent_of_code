@@ -22,7 +22,7 @@ public class TestLength18
         assertThat(checker.getPalindromeCount()).isEqualTo(8);
     }
 
-    @Test // 48 secs
+    @Test // 48 secs / 1.5 secs
     public void test18CharPalindromesOptimised()
     {
         int length = 18;

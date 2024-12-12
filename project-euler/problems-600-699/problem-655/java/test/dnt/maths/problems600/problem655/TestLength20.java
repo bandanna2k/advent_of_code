@@ -9,11 +9,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestLength20
 {
-    @Test // 52 secs
+    @Test // 52 secs /
     public void test20CharPalindromesOptimised()
     {
         int length = 20;
-        Checker checker = new CheckerOptimised24Plus(length, BD10000019, new BigDecimal("10000000000003900076"));
+        Checker checker = new CheckerOptimised16Plus(length, BD10000019, new BigDecimal("10000000000003900076"));
         checker.go();
         assertThat(checker.getPalindromeCount()).isEqualTo(10);
     }
