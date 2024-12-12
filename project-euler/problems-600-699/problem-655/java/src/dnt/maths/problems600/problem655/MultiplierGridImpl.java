@@ -2,7 +2,7 @@ package dnt.maths.problems600.problem655;
 
 import static java.lang.Math.*;
 
-public class MultiplierGridImpl implements MultiplierGrid
+public class MultiplierGridImpl implements Multiplier
 {
     public final int divisor;
     public final int sourceWidth;
