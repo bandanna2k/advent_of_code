@@ -142,4 +142,22 @@ public class TestMultiplierGrid
             }
         }
     }
+
+    public static class TestMultiplier5Chars
+    {
+        private MultiplierGridImpl grid = new MultiplierGridImpl(5, 19);
+
+        @Test
+        public void testToString()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    System.out.printf("%05d ", grid.multiplier(i, j));
+                }
+                System.out.printf("\n");
+            }
+        }
+    }
 }

@@ -23,7 +23,7 @@ public class MultiplierGridImpl implements Multiplier
         this.format = "%0" + charsToMultiply + "d ";
 
 
-        grid = new int[sourceWidth][destinationHeight];
+        grid = new int[5][destinationHeight];
         for (int i = 0; i < sourceWidth; i++)
         {
             int value = tens;
