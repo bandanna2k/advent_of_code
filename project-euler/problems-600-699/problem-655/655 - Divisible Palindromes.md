@@ -5,6 +5,12 @@ There are nine palindromes less than 100,000 which are divisible by 109.
 
 How many palindromes less than 10^32 are divisible by 10,000,019?
 
+# Abstract extended
+
+10^32 = 100 00000 00000 00000 00000 00000 00000
+less than means
+99 99999 99999 99999 99999 99999 99999 = 32 chars
+
 ## Strategy
 
 | Chars | Strategy            | Palindrome Count | Strategies | Time Taken             |
