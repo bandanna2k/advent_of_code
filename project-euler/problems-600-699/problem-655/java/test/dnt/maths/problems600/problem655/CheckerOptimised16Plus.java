@@ -15,7 +15,7 @@ public class CheckerOptimised16Plus implements Checker
 {
     private final int length;
     private final BigDecimal divisor;
-    private final MultiplierGridImpl multiplierGrid;
+    private final Multiplier multiplierGrid;
     private final int divisorLength;
     private final BigDecimal firstDivisible;
     private int palindromeCount = 0;

@@ -15,7 +15,7 @@ public class CheckerOptimised24Plus implements Checker
 {
     private final int length;
     private final BigDecimal divisor;
-    private final MultiplierGridImpl multiplierGrid;
+    private final Multiplier multiplier;
     private final int divisorLength;
     private final BigDecimal firstDivisible;
     private int palindromeCount = 0;
@@ -31,7 +31,7 @@ public class CheckerOptimised24Plus implements Checker
         this.length = length;
         this.divisor = divisor;
         this.divisorLength = divisor.toString().length();
-        this.multiplierGrid = new MultiplierGridImpl(2, divisor.intValue());
+        this.multiplier = new MultiplierFor4Chars();
         this.firstDivisible = firstDivisible;
     }
 
@@ -57,8 +57,10 @@ public class CheckerOptimised24Plus implements Checker
         String nextString = firstDivisible.toString();
         while(true)
         {
-            int a = Integer.parseInt(new String(new char[] { nextString.charAt(1), nextString.charAt(0) } )); // Swapped
-            int d = Integer.parseInt(new String(new char[] { nextString.charAt(length - 2), nextString.charAt(length - 1) } ));
+            int a = Integer.parseInt(new String(new char[] {
+                    nextString.charAt(3),  nextString.charAt(2), nextString.charAt(1), nextString.charAt(0) } )); // Swapped
+            int d = Integer.parseInt(new String(new char[] {
+                    nextString.charAt(length - 4), nextString.charAt(length - 3), nextString.charAt(length - 2), nextString.charAt(length - 1) } ));
 
             int b = Integer.parseInt(String.valueOf(nextString.charAt(divisorLength - 1)));
             int c = Integer.parseInt(String.valueOf(nextString.charAt(length - divisorLength))); // Swapped
@@ -76,10 +78,8 @@ public class CheckerOptimised24Plus implements Checker
                 }
             }
 
-            int multiplierC = floorMod(c - b, 10);
-            int multiplierD = multiplierGrid.multiplier(d, a);
+            int multiplierD = multiplier.multiplier(d, a);
             BigDecimal MULTIPLIER = new BigDecimal(multiplierD);
-            MULTIPLIER = MULTIPLIER.add(new BigDecimal(multiplierC * 10_000_000));
             BigDecimal next = new BigDecimal(nextString).add(divisor.multiply(MULTIPLIER));
             nextString = next.toString();
             if(nextString.length() > length)
