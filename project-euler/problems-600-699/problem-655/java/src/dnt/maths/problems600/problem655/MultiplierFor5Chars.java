@@ -2,6 +2,7 @@ package dnt.maths.problems600.problem655;
 
 import static java.lang.Math.floorMod;
 
+@Deprecated(since = "Needs more testing")
 public class MultiplierFor5Chars implements Multiplier
 {
     private static final int CHARS = 5;

@@ -73,8 +73,8 @@ public class CheckerOptimised24Plus implements Checker
                 if(isPalindrome(nextString))
                 {
                     assert isDivisible(new BigDecimal(nextString), divisor);
-                    System.out.printf("INFO:%s: Horah, Palindrome found. %s %d\n", Instant.now(), nextString, palindromeCount);
                     this.palindromeCount++;
+                    System.out.printf("INFO:%s: Horah, Palindrome found. %s %d\n", Instant.now(), nextString, palindromeCount);
                 }
             }
 

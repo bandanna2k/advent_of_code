@@ -90,9 +90,4 @@ public class CheckerOptimised16Plus implements Checker
             }
         }
     }
-
-    private static String swap2chars(String input)
-    {
-        return new String(new char[] { input.charAt(1), input.charAt(0) });
-    }
 }

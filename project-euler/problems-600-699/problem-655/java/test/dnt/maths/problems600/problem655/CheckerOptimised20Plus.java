@@ -31,7 +31,7 @@ public class CheckerOptimised20Plus implements Checker
         this.length = length;
         this.divisor = divisor;
         this.divisorLength = divisor.toString().length();
-        this.multiplier = new MultiplierFor5Chars();
+        this.multiplier = new MultiplierFor4Chars();
         this.firstDivisible = firstDivisible;
     }
 
