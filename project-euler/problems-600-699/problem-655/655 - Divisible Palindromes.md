@@ -176,3 +176,22 @@ Palindrome found: AD:Record[number=10000002, modulus=1202099], BC:Record[number=
 
 Palindrome found: AD:Record[number=10000000, modulus=1202096], BC:Record[number=53779944, modulus=8797923], Mod:10000019
 (10000000537799444499773500000001) / 10000019
+
+
+
+
+/usr/lib/jvm/java-1.21.0-openjdk-amd64/bin/java -ea -Didea.test.cyclic.buffer.size=4194304 -javaagent:/snap/intellij-idea-community/539/lib/idea_rt.jar=43137:/snap/intellij-idea-community/539/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /snap/intellij-idea-community/539/lib/idea_rt.jar:/snap/intellij-idea-community/539/plugins/junit/lib/junit5-rt.jar:/snap/intellij-idea-community/539/plugins/junit/lib/junit-rt.jar:/home/northd/Code/advent_of_code/out/test/java:/home/northd/Code/advent_of_code/out/production/java:/home/northd/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/home/northd/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/northd/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/home/northd/.m2/repository/net/bytebuddy/byte-buddy/1.14.18/byte-buddy-1.14.18.jar:/home/northd/Code/advent_of_code/out/test/project-euler:/home/northd/Code/advent_of_code/out/production/project-euler com.intellij.rt.junit.JUnitStarter -ideVersion5 -junit4 dnt.maths.problems600.problem655.byQuarters.NumberModuliTest,testModDeltas
+1234567012345670123456701234567 modN = 5487282
+1234568012345670123456701234567 modN = 8628301
+Pos 25, mod delta = 3141019
+1234567012345670123456701234567 modN = 5487282
+1234567012345680123456701234567 modN = 5523382
+Pos 17mod delta = 36100
+1234567012345670123456701234567 modN = 5487282
+1234567012345670123456801234567 modN = 5487092
+Pos 8mod delta = -190
+1234567012345670123456701234567 modN = 5487282
+1234567012345670123456701234568 modN = 5487283
+Pos 1mod delta = 1
+
+Process finished with exit code 0

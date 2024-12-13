@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NumberModuliTest
@@ -33,9 +34,87 @@ public class NumberModuliTest
     }
 
     @Test
+    public void testLongCharLength()
+    {
+        System.out.printf("%d Len:%d\n", Long.MAX_VALUE, String.valueOf(Long.MAX_VALUE).length());
+    }
+
+    @Test
     public void testModDeltas()
     {
-        BigDecimal firstValue = new BigDecimal("1000000000000000000000000000001");
+        {
+            BigDecimal value1 = new BigDecimal("01234567012345670123456701234567");
+            BigDecimal value2 = new BigDecimal("01234568012345670123456701234567");
+            BigDecimal value1ModN = value1.divideAndRemainder(BD10000019)[1];
+            BigDecimal value2ModN = value2.divideAndRemainder(BD10000019)[1];
+            System.out.printf("%s modN = %s\n", value1, value1ModN);
+            System.out.printf("%s modN = %s\n", value2, value2ModN);
+            BigDecimal increment = value2ModN.subtract(value1ModN).add(BD10000019).divideAndRemainder(BD10000019)[1];
+            System.out.printf("Pos 25, mod delta = %s\n", increment);
+        }
+        {
+            BigDecimal value1 = new BigDecimal("01234567012345670123456701234567");
+            BigDecimal value2 = new BigDecimal("01234567012345680123456701234567");
+            BigDecimal value1ModN = value1.divideAndRemainder(BD10000019)[1];
+            BigDecimal value2ModN = value2.divideAndRemainder(BD10000019)[1];
+            System.out.printf("%s modN = %s\n", value1, value1ModN);
+            System.out.printf("%s modN = %s\n", value2, value2ModN);
+            BigDecimal increment = value2ModN.subtract(value1ModN).add(BD10000019).divideAndRemainder(BD10000019)[1];
+            System.out.printf("Pos 17mod delta = %s\n", increment);
+        }
+        {
+            BigDecimal value1 = new BigDecimal("01234567012345670123456701234567");
+            BigDecimal value2 = new BigDecimal("01234567012345670123456801234567");
+            BigDecimal value1ModN = value1.divideAndRemainder(BD10000019)[1];
+            BigDecimal value2ModN = value2.divideAndRemainder(BD10000019)[1];
+            System.out.printf("%s modN = %s\n", value1, value1ModN);
+            System.out.printf("%s modN = %s\n", value2, value2ModN);
+            BigDecimal increment = value2ModN.subtract(value1ModN).add(BD10000019).divideAndRemainder(BD10000019)[1];
+            System.out.printf("Pos 8mod delta = %s\n", increment);
+        }
+        {
+            BigDecimal value1 = new BigDecimal("01234567012345670123456701234567");
+            BigDecimal value2 = new BigDecimal("01234567012345670123456701234568");
+            BigDecimal value1ModN = value1.divideAndRemainder(BD10000019)[1];
+            BigDecimal value2ModN = value2.divideAndRemainder(BD10000019)[1];
+            System.out.printf("%s modN = %s\n", value1, value1ModN);
+            System.out.printf("%s modN = %s\n", value2, value2ModN);
+            BigDecimal increment = value2ModN.subtract(value1ModN).add(BD10000019).divideAndRemainder(BD10000019)[1];
+            System.out.printf("Pos 1mod delta = %s\n", increment);
+        }
+    }
 
+    @Test
+    public void testAddingModDeltas()
+    {
+        BigDecimal increment;
+        {
+            BigDecimal value1 = new BigDecimal("01234567012345670123456701234567");
+            BigDecimal value2 = new BigDecimal("01234568012345670123456701234567");
+
+            BigDecimal value1ModN = value1.divideAndRemainder(BD10000019)[1];
+            BigDecimal value2ModN = value2.divideAndRemainder(BD10000019)[1];
+            System.out.printf("%s modN = %s\n", value1, value1ModN);
+            System.out.printf("%s modN = %s\n", value2, value2ModN);
+            increment = value2ModN.subtract(value1ModN).add(BD10000019).divideAndRemainder(BD10000019)[1];
+            System.out.printf("Pos 25, mod delta = %s\n", increment);
+
+            assertThat(value1ModN.add(increment).divideAndRemainder(BD10000019)[1].longValue())
+                    .isEqualTo(value2ModN.divideAndRemainder(BD10000019)[1].longValue());
+        }
+        {
+            BigDecimal value1 = new BigDecimal("01234568012345670123456701234567");
+            BigDecimal value2 = new BigDecimal("01234569012345670123456701234567");
+
+            BigDecimal value1ModN = value1.divideAndRemainder(BD10000019)[1];
+            BigDecimal value2ModN = value2.divideAndRemainder(BD10000019)[1];
+            System.out.printf("%s modN = %s\n", value1, value1ModN);
+            System.out.printf("%s modN = %s\n", value2, value2ModN);
+            increment = value2ModN.subtract(value1ModN).add(BD10000019).divideAndRemainder(BD10000019)[1];
+            System.out.printf("Pos 25, mod delta = %s\n", increment);
+
+            assertThat(value1ModN.add(increment).divideAndRemainder(BD10000019)[1].longValue())
+                    .isEqualTo(value2ModN.divideAndRemainder(BD10000019)[1].longValue());
+        }
     }
 }
