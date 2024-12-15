@@ -195,3 +195,7 @@ Pos 8mod delta = -190
 Pos 1mod delta = 1
 
 Process finished with exit code 0
+
+
+
+10000002000000000000000010000002) % 10000019 = 4547221?
