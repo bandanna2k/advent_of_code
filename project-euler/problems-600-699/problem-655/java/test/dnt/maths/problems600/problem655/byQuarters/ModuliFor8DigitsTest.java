@@ -4,17 +4,16 @@ import dnt.common.BigDecimalUtils;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Outer24to32ModuliTest
+public class ModuliFor8DigitsTest
 {
     @Test
     public void testOuter24to32()
     {
-        Outer24to32Moduli moduli = new Outer24to32Moduli();
+        ModuliFor8Digits moduli = new ModuliFor8Digits(25, BD10000019.intValue());
 
         System.out.println(moduli.get(0));
         System.out.println(moduli.get(1));
