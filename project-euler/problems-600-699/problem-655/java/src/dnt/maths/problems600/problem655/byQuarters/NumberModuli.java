@@ -69,15 +69,6 @@ public class NumberModuli
         }
     }
 
-    private static String reverseString(String s)
-    {
-        String reversedStr = "";
-        for (int i = 0; i < s.length(); i++) {
-            reversedStr = s.charAt(i) + reversedStr;
-        }
-        return s;
-    }
-
     public long getModulusAD(int number)
     {
         return modulusForAandD.get(number).modulus;

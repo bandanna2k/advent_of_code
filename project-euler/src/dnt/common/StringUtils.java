@@ -1,7 +1,5 @@
 package dnt.common;
 
-import java.math.BigDecimal;
-
 public class StringUtils
 {
     public static boolean isPalindrome(String string)
@@ -16,4 +14,12 @@ public class StringUtils
         return true;
     }
 
+    public static String reverse(String s)
+    {
+        String reversedStr = "";
+        for (int i = 0; i < s.length(); i++) {
+            reversedStr = s.charAt(i) + reversedStr;
+        }
+        return reversedStr;
+    }
 }

@@ -24,14 +24,5 @@ public abstract class BaseModuli
         return modIncrement.intValue() % divisor.intValue();
     }
 
-    protected static String reverseString(String s)
-    {
-        String reversedStr = "";
-        for (int i = 0; i < s.length(); i++) {
-            reversedStr = s.charAt(i) + reversedStr;
-        }
-        return s;
-    }
-
     public record Record(int number, int modulus) {}
 }

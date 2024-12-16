@@ -21,6 +21,8 @@ public class ModuliFor8Digits extends BaseModuli
 
     public ModuliFor8Digits(int charsFrom, int intDivisor)
     {
+        System.out.printf("INFO:Start creating moduli class for chars %d to %d.\n", charsFrom, charsFrom + 7);
+
         BigDecimal bigA = createFirstBigDecimal(charsFrom);
         BigDecimal bigModA = bigA.remainder(new BigDecimal(intDivisor));
 
@@ -35,9 +37,10 @@ public class ModuliFor8Digits extends BaseModuli
             intModA = (intModA + intModAIncrement);
             intModA = intModA % intDivisor;
         }
+        System.out.print("INFO:Finished creating moduli class.\n");
     }
 
-    public void forEach(Consumer<Record> record, int chars)
+    public void forEach(int chars, Consumer<Record> record)
     {
         int limit = (int) Math.pow(10, chars);
         for (int i = 0; i < limit; i++)
@@ -46,7 +49,7 @@ public class ModuliFor8Digits extends BaseModuli
         }
     }
 
-    Record get(int i)
+    public Record get(int i)
     {
         return modulusForA.get(i);
     }
