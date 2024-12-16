@@ -32,4 +32,14 @@ public abstract class BigDecimalUtils
         }
         throw new RuntimeException("Failed to find firstDivisibleNumber");
     }
+
+    public static BigDecimal createFirstBigDecimal(int chars)
+    {
+        StringBuilder sb = new StringBuilder("1");
+        while(sb.length() < chars)
+        {
+            sb.append("0");
+        }
+        return new BigDecimal(sb.toString());
+    }
 }
