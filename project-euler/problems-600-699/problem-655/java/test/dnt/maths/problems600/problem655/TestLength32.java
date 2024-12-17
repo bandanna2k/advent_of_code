@@ -27,12 +27,13 @@ public class TestLength32
         extractor.go();
     }
 
-    private class PalindromeExtractor
+    private static class PalindromeExtractor
     {
         private final ModuliFor8Digits moduliA;
         private final ModuliFor8Digits moduliB;
         private final ModuliFor8Digits moduliC;
         private final ModuliFor8Digits moduliD;
+        private long palindromeCount = 0;
 
         public PalindromeExtractor(ModuliFor8Digits moduliA,
                                    ModuliFor8Digits moduliB,
@@ -47,18 +48,19 @@ public class TestLength32
 
         void go()
         {
-            for (int i = 1; i < 10_000_000; i++)
+            for (int i = 10_000_000; i < 100_000_000; i++)
             {
                 BaseModuli.Record recordA = moduliA.get(i);
 
-                for (int j = 0; j < 10_000_000; j++)
+                int d = Integer.parseInt(reverse(String.format("%08d", i)));
+                BaseModuli.Record recordD = moduliD.get(d);
+
+                for (int j = 0; j < 100_000_000; j++)
                 {
                     BaseModuli.Record recordB = moduliB.get(j);
 
-                    int c = Integer.parseInt(reverse(String.valueOf(recordB.number())));
-                    int d = Integer.parseInt(reverse(String.valueOf(recordA.number())));
+                    int c = Integer.parseInt(reverse(String.format("%08d", j)));
                     BaseModuli.Record recordC = moduliC.get(c);
-                    BaseModuli.Record recordD = moduliD.get(d);
 
 //                    System.out.println(recordA);
 //                    System.out.println(recordB);
@@ -68,12 +70,13 @@ public class TestLength32
                     int modulusSum = recordA.modulus() + recordB.modulus() + recordC.modulus() + recordD.modulus();
                     if(modulusSum % BD10000019.intValue() == 0)
                     {
-                        System.out.printf("Palindrome found. %s %s %s %s\n", recordA, recordB, recordC, recordD);
-                        System.out.printf("%08d%08d%08d%08d %% 10000019", recordA.number(), recordB.number(), recordC.number(), recordD.number());
-                        return;
+//                        System.out.printf("Palindrome found. %s %s %s %s\n", recordA, recordB, recordC, recordD);
+                        System.out.printf("%08d%08d%08d%08d %% 10000019\n", recordA.number(), recordB.number(), recordC.number(), recordD.number());
+                        palindromeCount++;
                     }
                 }
             }
+            System.out.printf("\nPalindrome count:" + palindromeCount);
         }
     }
 
