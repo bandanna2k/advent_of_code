@@ -14,13 +14,18 @@ import static dnt.common.BigDecimalUtils.createFirstBigDecimal;
  * quarter and then add the moduli up to get the moduli
  * for the large number.
  */
-public class ModuliFor8Digits extends BaseModuli implements ModuliCalculator
+public class ModuliCalculatorImpl extends BaseModuli implements ModuliCalculator
 {
     private final List<ModulusRecord> modulusForA = new ArrayList<>();
+    private final int digitCount;
 
-    public ModuliFor8Digits(int charsFrom, int intDivisor)
+    public ModuliCalculatorImpl(int digitCount, int charsFrom, int intDivisor)
     {
-        System.out.printf("INFO:Start creating moduli class for chars %d to %d.\n", charsFrom, charsFrom + 7);
+        this.digitCount = digitCount;
+
+        System.out.printf("INFO:Start creating moduli class for chars %d to %d.\n", charsFrom, charsFrom + digitCount - 1);
+
+        int arraySize = (int) Math.pow(10, digitCount);
 
         BigDecimal bigA = createFirstBigDecimal(charsFrom);
         BigDecimal bigModA = bigA.remainder(new BigDecimal(intDivisor));
@@ -29,7 +34,7 @@ public class ModuliFor8Digits extends BaseModuli implements ModuliCalculator
         int intModAIncrement = bigModA.intValue() % intDivisor;
 
         modulusForA.add(new ModulusRecord(0, 0));
-        for (int a = 1; a < 100_000_000; a++)
+        for (int a = 1; a < arraySize; a++)
         {
             modulusForA.add(new ModulusRecord(a, intModA));
 
@@ -46,11 +51,11 @@ public class ModuliFor8Digits extends BaseModuli implements ModuliCalculator
 
     public int getFirst()
     {
-        return (int) Math.pow(10, 7);
+        return (int) Math.pow(10, digitCount - 1);
     }
 
     public int getLast()
     {
-        return ((int) Math.pow(10, 8)) - 1;
+        return ((int) Math.pow(10, digitCount)) - 1;
     }
 }

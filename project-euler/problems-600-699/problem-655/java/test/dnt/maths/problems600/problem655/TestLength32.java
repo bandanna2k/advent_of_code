@@ -1,12 +1,10 @@
 package dnt.maths.problems600.problem655;
 
-import dnt.maths.problems600.problem655.byQuarters.BaseModuli;
-import dnt.maths.problems600.problem655.byQuarters.ModuliFor8Digits;
+import dnt.maths.problems600.problem655.byQuarters.*;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static dnt.common.StringUtils.*;
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,57 +25,16 @@ public class TestLength32
         extractor.go();
     }
 
-    private static class PalindromeExtractor
+    @Test
+    public void testLength32_2()
     {
-        private final ModuliFor8Digits moduliA;
-        private final ModuliFor8Digits moduliB;
-        private final ModuliFor8Digits moduliC;
-        private final ModuliFor8Digits moduliD;
-        private long palindromeCount = 0;
+        ModuliCalculatorImpl outer1to8 = new ModuliCalculatorImpl(8, 1, BD10000019.intValue());
+        ModuliCalculatorImpl outer9to16 = new ModuliCalculatorImpl(8, 9, BD10000019.intValue());
+        ModuliCalculatorImpl outer17to24 = new ModuliCalculatorImpl(8, 17, BD10000019.intValue());
+        ModuliCalculatorImpl outer25to32 = new ModuliCalculatorImpl(8, 25, BD10000019.intValue());
 
-        public PalindromeExtractor(ModuliFor8Digits moduliA,
-                                   ModuliFor8Digits moduliB,
-                                   ModuliFor8Digits moduliC,
-                                   ModuliFor8Digits moduliD)
-        {
-            this.moduliA = moduliA;
-            this.moduliB = moduliB;
-            this.moduliC = moduliC;
-            this.moduliD = moduliD;
-        }
-
-        void go()
-        {
-            for (int i = 10_000_000; i < 100_000_000; i++)
-            {
-                BaseModuli.Record recordA = moduliA.get(i);
-
-                int d = Integer.parseInt(reverse(String.format("%08d", i)));
-                BaseModuli.Record recordD = moduliD.get(d);
-
-                for (int j = 0; j < 100_000_000; j++)
-                {
-                    BaseModuli.Record recordB = moduliB.get(j);
-
-                    int c = Integer.parseInt(reverse(String.format("%08d", j)));
-                    BaseModuli.Record recordC = moduliC.get(c);
-
-//                    System.out.println(recordA);
-//                    System.out.println(recordB);
-//                    System.out.println(recordC);
-//                    System.out.println(recordD);
-
-                    int modulusSum = recordA.modulus() + recordB.modulus() + recordC.modulus() + recordD.modulus();
-                    if(modulusSum % BD10000019.intValue() == 0)
-                    {
-//                        System.out.printf("Palindrome found. %s %s %s %s\n", recordA, recordB, recordC, recordD);
-                        System.out.printf("%08d%08d%08d%08d %% 10000019\n", recordA.number(), recordB.number(), recordC.number(), recordD.number());
-                        palindromeCount++;
-                    }
-                }
-            }
-            System.out.printf("\nPalindrome count:" + palindromeCount);
-        }
+        PalindromeExtractor extractor = new PalindromeExtractor(outer25to32, outer17to24, outer9to16, outer1to8);
+        extractor.go();
     }
 
     @Test // 48 secs

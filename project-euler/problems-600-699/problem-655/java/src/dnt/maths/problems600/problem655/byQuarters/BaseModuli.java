@@ -24,5 +24,4 @@ public abstract class BaseModuli
         return modIncrement.intValue() % divisor.intValue();
     }
 
-    public record Record(int number, int modulus) {}
 }
