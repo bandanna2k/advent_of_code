@@ -3,6 +3,7 @@ package dnt.maths.problems600.problem655.byQuarters;
 import java.math.BigDecimal;
 import java.util.function.Consumer;
 
+import static dnt.common.IntegerUtils.reverseDigits;
 import static dnt.common.StringUtils.reverse;
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
 
@@ -29,11 +30,11 @@ public class PalindromeExtractorAD
     {
         int firstA = moduliA.getFirst();
         int lastA = moduliA.getLast();
-        for (int i = firstA; i <= lastA; i++)
+        for (int a = firstA; a <= lastA; a++)
         {
-            ModulusRecord recordA = moduliA.get(i);
+            ModulusRecord recordA = moduliA.get(a);
 
-            int d = Integer.parseInt(reverse(String.format(formatAD, i)));
+            int d = reverseDigits(a);
             ModulusRecord recordD = moduliD.get(d);
 
             int modulusSum = recordA.modulus() + recordD.modulus();
