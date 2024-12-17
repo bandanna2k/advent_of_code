@@ -1,8 +1,11 @@
 package dnt.maths.problems600.problem655.byQuarters;
 
+import dnt.common.IntegerUtils;
+
 import java.math.BigDecimal;
 import java.util.function.Consumer;
 
+import static dnt.common.IntegerUtils.reverseDigits;
 import static dnt.common.StringUtils.reverse;
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
 
@@ -38,11 +41,11 @@ public class PalindromeExtractor
     {
         int firstA = moduliA.getFirst();
         int lastA = moduliA.getLast();
-        for (int i = firstA; i <= lastA; i++)
+        for (int a = firstA; a <= lastA; a++)
         {
-            ModulusRecord recordA = moduliA.get(i);
+            ModulusRecord recordA = moduliA.get(a);
 
-            int d = Integer.parseInt(reverse(String.format(formatAD, i)));
+            int d = reverseDigits(a);
             ModulusRecord recordD = moduliD.get(d);
 
             int lastB = moduliB.getLast();
@@ -52,17 +55,8 @@ public class PalindromeExtractor
             {
                 ModulusRecord recordB = moduliB.get(j);
 
-                int c = Integer.parseInt(reverse(String.format(formatBC, j)));
+                int c = reverseDigits(j);
                 ModulusRecord recordC = moduliC.get(c);
-
-try
-{
-    Thread.sleep(1);
-}
-catch (InterruptedException e)
-{
-    throw new RuntimeException(e);
-}
 
                 int modulusSum = recordA.modulus() + recordB.modulus() + recordC.modulus() + recordD.modulus();
                 if (modulusSum % BD10000019.intValue() == 0)
@@ -82,5 +76,10 @@ catch (InterruptedException e)
             }
         }
         System.out.printf("\nPalindrome count:" + palindromeCount);
+    }
+
+    public long getPalindromeCount()
+    {
+        return palindromeCount;
     }
 }

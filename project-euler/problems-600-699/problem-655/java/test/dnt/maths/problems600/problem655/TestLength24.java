@@ -33,5 +33,6 @@ public class TestLength24
                     System.out.println(bigPalindrome + " % " + BD10000019.intValue());
                 });
         extractor.go();
+        assertThat(extractor.getPalindromeCount()).isEqualTo(100);
     }
 }

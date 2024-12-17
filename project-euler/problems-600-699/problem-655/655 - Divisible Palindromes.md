@@ -23,7 +23,9 @@ less than means
 | 13    | "                    | 6 (need 2nd)     |            | 4.2 secs               |
 | 14    | "                    | 0                |            | 13 secs                |
 | 15    | "                    | 48 (need 2nd)    |            | 43 secs                |
-| 16    | Optimised (x2 & x4)  | 8                | 4          | 1 sec / .2             |
+| 16    | "                    | 8                | 4          | 1 sec / .2             |
+| 16    | Optimised x2         | 8                | 4          | 1 sec / .2             |
+| 16    | Optimised x4         | 8                | 4          | 1 sec / .2             |
 | 16    | Palindrome Extractor | 8                | 4          | 32 secs                |
 | 17    | Brute Force          | 482 (need 2nd)   |            | 6 mins                 |
 | 18    | Optimised (x2 & x4)  | 101              | 3          | 48 secs / 1.5 s        |
