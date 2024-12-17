@@ -53,4 +53,10 @@ public class ModuliFor8Digits extends BaseModuli implements ModuliCalculator
     {
         return ((int) Math.pow(10, 8)) - 1;
     }
+
+    @Override
+    public int getDigitCount()
+    {
+        return 8;
+    }
 }

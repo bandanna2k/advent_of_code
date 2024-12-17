@@ -21,7 +21,7 @@ public class TestLength32
         ModuliFor8Digits outer17to24 = new ModuliFor8Digits(17, BD10000019.intValue());
         ModuliFor8Digits outer25to32 = new ModuliFor8Digits(25, BD10000019.intValue());
 
-        PalindromeExtractor extractor = new PalindromeExtractor(outer25to32, outer17to24, outer9to16, outer1to8);
+        PalindromeExtractor extractor = new PalindromeExtractor(outer25to32, outer17to24, outer9to16, outer1to8, p -> {});
         extractor.go();
     }
 
@@ -33,7 +33,7 @@ public class TestLength32
         ModuliCalculatorImpl outer17to24 = new ModuliCalculatorImpl(8, 17, BD10000019.intValue());
         ModuliCalculatorImpl outer25to32 = new ModuliCalculatorImpl(8, 25, BD10000019.intValue());
 
-        PalindromeExtractor extractor = new PalindromeExtractor(outer25to32, outer17to24, outer9to16, outer1to8);
+        PalindromeExtractor extractor = new PalindromeExtractor(outer25to32, outer17to24, outer9to16, outer1to8, p -> {});
         extractor.go();
     }
 

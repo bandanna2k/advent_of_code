@@ -7,4 +7,6 @@ public interface ModuliCalculator
     int getLast();
 
     ModulusRecord get(int i);
+
+    int getDigitCount();
 }

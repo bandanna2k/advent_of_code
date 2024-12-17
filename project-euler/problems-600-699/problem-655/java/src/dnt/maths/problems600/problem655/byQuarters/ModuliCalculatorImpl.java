@@ -30,6 +30,8 @@ public class ModuliCalculatorImpl extends BaseModuli implements ModuliCalculator
         BigDecimal bigA = createFirstBigDecimal(charsFrom);
         BigDecimal bigModA = bigA.remainder(new BigDecimal(intDivisor));
 
+        assert bigModA.intValue() != intDivisor;
+
         int intModA = bigModA.intValue();
         int intModAIncrement = bigModA.intValue() % intDivisor;
 
@@ -47,6 +49,12 @@ public class ModuliCalculatorImpl extends BaseModuli implements ModuliCalculator
     public ModulusRecord get(int i)
     {
         return modulusForA.get(i);
+    }
+
+    @Override
+    public int getDigitCount()
+    {
+        return digitCount;
     }
 
     public int getFirst()
