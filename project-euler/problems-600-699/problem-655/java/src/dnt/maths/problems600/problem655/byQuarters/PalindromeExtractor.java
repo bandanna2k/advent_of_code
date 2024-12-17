@@ -1,7 +1,4 @@
-package dnt.maths.problems600.problem655;
-
-import dnt.maths.problems600.problem655.byQuarters.ModuliCalculator;
-import dnt.maths.problems600.problem655.byQuarters.ModulusRecord;
+package dnt.maths.problems600.problem655.byQuarters;
 
 import java.math.BigDecimal;
 import java.util.function.Consumer;
@@ -9,7 +6,7 @@ import java.util.function.Consumer;
 import static dnt.common.StringUtils.reverse;
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
 
-class PalindromeExtractor
+public class PalindromeExtractor
 {
     private final String formatAD;
     private final String formatBC;
@@ -37,7 +34,7 @@ class PalindromeExtractor
         assert moduliB.getDigitCount() == moduliC.getDigitCount();
     }
 
-    void go()
+    public void go()
     {
         int firstA = moduliA.getFirst();
         int lastA = moduliA.getLast();

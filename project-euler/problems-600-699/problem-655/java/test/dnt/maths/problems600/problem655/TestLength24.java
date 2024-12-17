@@ -1,12 +1,11 @@
 package dnt.maths.problems600.problem655;
 
-import dnt.common.BigDecimalUtils;
 import dnt.maths.problems600.problem655.byQuarters.ModuliCalculatorImpl;
+import dnt.maths.problems600.problem655.byQuarters.PalindromeExtractor;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static dnt.common.BigDecimalUtils.*;
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
 import static org.assertj.core.api.Assertions.assertThat;
 

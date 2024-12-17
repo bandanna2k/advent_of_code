@@ -1,5 +1,8 @@
 package dnt.maths.problems600.problem655;
 
+import dnt.maths.problems600.problem655.byQuarters.ModuliCalculator;
+import dnt.maths.problems600.problem655.byQuarters.ModuliCalculatorImpl;
+import dnt.maths.problems600.problem655.byQuarters.PalindromeExtractorAD;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -71,5 +74,20 @@ public class TestLength16AndBelow
 
         System.out.printf("INFO:%s:End %d\n", now = Instant.now(), Duration.between(start, now).toMillis());
         assertThat(checker.getPalindromeCount()).isEqualTo(8);
+    }
+
+    @Test // 1 second
+    public void test16CharUsingPalindromeExtractor()
+    {
+        Instant start, now;
+        System.out.printf("INFO:%s:Start go\n", start = Instant.now());
+
+        ModuliCalculator moduliA = new ModuliCalculatorImpl(8, 9, BD10000019.intValue());
+        ModuliCalculator moduliD = new ModuliCalculatorImpl(8, 1, BD10000019.intValue());
+        PalindromeExtractorAD extractorAD = new PalindromeExtractorAD(moduliA, moduliD, System.out::println);
+        extractorAD.go();
+        assertThat(extractorAD.getPalindromeCount()).isEqualTo(8);
+
+        System.out.printf("INFO:%s:End %d\n", now = Instant.now(), Duration.between(start, now).toMillis());
     }
 }
