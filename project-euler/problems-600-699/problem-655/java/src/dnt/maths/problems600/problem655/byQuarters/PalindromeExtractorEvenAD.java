@@ -4,25 +4,22 @@ import java.math.BigDecimal;
 import java.util.function.Consumer;
 
 import static dnt.common.IntegerUtils.reverseDigits;
-import static dnt.common.StringUtils.reverse;
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
 
-public class PalindromeExtractorAD
+public class PalindromeExtractorEvenAD implements PalindromeExtractor
 {
-    private final String formatAD;
     private final ModuliCalculator moduliA;
     private final ModuliCalculator moduliD;
     private final Consumer<BigDecimal> palindromeConsumer;
     private long palindromeCount = 0;
 
-    public PalindromeExtractorAD(ModuliCalculator moduliA,
-                                 ModuliCalculator moduliD,
-                                 Consumer<BigDecimal> palindromeConsumer)
+    public PalindromeExtractorEvenAD(ModuliCalculator moduliA,
+                                     ModuliCalculator moduliD,
+                                     Consumer<BigDecimal> palindromeConsumer)
     {
         this.palindromeConsumer = palindromeConsumer;
         this.moduliA = moduliA;
         this.moduliD = moduliD;
-        this.formatAD = "%0" + moduliA.getDigitCount() + "d";
         assert moduliA.getDigitCount() == moduliD.getDigitCount();
     }
 

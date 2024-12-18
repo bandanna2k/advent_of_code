@@ -75,7 +75,7 @@ class CheckByPalindromeOddLength implements Checker
         if (isWholeNumber(divided))
         {
             palindromeCount++;
-//                System.out.println(value);
+            System.out.println(value);
         }
         testCount++;
     }

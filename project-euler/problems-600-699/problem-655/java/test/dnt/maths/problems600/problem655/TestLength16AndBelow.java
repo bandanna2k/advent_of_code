@@ -2,7 +2,7 @@ package dnt.maths.problems600.problem655;
 
 import dnt.maths.problems600.problem655.byQuarters.ModuliCalculator;
 import dnt.maths.problems600.problem655.byQuarters.ModuliCalculatorImpl;
-import dnt.maths.problems600.problem655.byQuarters.PalindromeExtractorAD;
+import dnt.maths.problems600.problem655.byQuarters.PalindromeExtractorEvenAD;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -84,7 +84,7 @@ public class TestLength16AndBelow
 
         ModuliCalculator moduliA = new ModuliCalculatorImpl(8, 9, BD10000019.intValue());
         ModuliCalculator moduliD = new ModuliCalculatorImpl(8, 1, BD10000019.intValue());
-        PalindromeExtractorAD extractorAD = new PalindromeExtractorAD(moduliA, moduliD, System.out::println);
+        PalindromeExtractorEvenAD extractorAD = new PalindromeExtractorEvenAD(moduliA, moduliD, System.out::println);
         extractorAD.go();
         assertThat(extractorAD.getPalindromeCount()).isEqualTo(8);
 
