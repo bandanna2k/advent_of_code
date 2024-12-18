@@ -2,6 +2,7 @@ package dnt.maths.problems600.problem655;
 
 import dnt.maths.problems600.problem655.byQuarters.ModuliCalculatorImpl;
 import dnt.maths.problems600.problem655.byQuarters.PalindromeExtractor;
+import dnt.maths.problems600.problem655.byQuarters.PalindromeExtractorEven;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -28,7 +29,7 @@ public class TestLength24
         ModuliCalculatorImpl modCalculatorC = new ModuliCalculatorImpl(4, 9, BD10000019.intValue());
         ModuliCalculatorImpl modCalculatorD = new ModuliCalculatorImpl(8, 1, BD10000019.intValue());
 
-        PalindromeExtractor extractor = new PalindromeExtractor(modCalculatorA, modCalculatorB, modCalculatorC, modCalculatorD,
+        PalindromeExtractor extractor = new PalindromeExtractorEven(modCalculatorA, modCalculatorB, modCalculatorC, modCalculatorD,
                 bigPalindrome -> {
                     System.out.println(bigPalindrome + " % " + BD10000019.intValue());
                 });
