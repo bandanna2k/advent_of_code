@@ -28,11 +28,9 @@ class Processor:
                 wall = (int(wall[1]), int(wall[0]))
                 self.walls.add(wall)
 
-        # print(walls)
-
-        # for x in range(0,6):
+        # for x in range(0,70):
         #     s = ""
-        #     for y in range(0,6):
+        #     for y in range(0,70):
         #         if (x, y) in self.walls:
         #             s = "{}#".format(s)
         #         else:
@@ -41,27 +39,45 @@ class Processor:
 
         bfs = []
         visited = set()
+        visitedPath = {}
 
         visited.add(self.start)
+        visitedPath[self.start] = self.start
+
         bfs = bfs + [self.start]
 
-        parent = [start]
-        while bfs.__len__() > 0:
-            pop = bfs.pop()
-            path = [pop]
+        while bfs:
+            current = bfs.pop()
 
-            adjacent = self.getAdjacent(pop)
-            adjacent = {pos for pos in adjacent if not pos in self.walls}
-
-            for pos in adjacent:
-                newPath = [path]
+            adjacent2 = self.getAdjacent(current)
+            adjacent2 = {pos for pos in adjacent2 if not pos in self.walls}
+            for pos in adjacent2:
                 if not pos in visited:
+                    visited.add(pos)
+
+                    if not pos in visitedPath:
+                        visitedPath[pos] = current
+
                     if pos == self.goal:
-                        print(newPath)
+                        path = self.getPath(visitedPath, pos)
+                        self.answer = path.__len__()
+                        print(path)
+                        for x in range(0,70):
+                            s = ""
+                            for y in range(0,70):
+                                if (x, y) in path:
+                                    s = "{}O".format(s)
+                                elif (x, y) in visited:
+                                    s = "{} ".format(s)
+                                elif (x, y) in self.walls:
+                                    s = "{}#".format(s)
+                                else:
+                                    s = "{}.".format(s)
+                            print(s)
                         return
 
-                    bfs = bfs + [pos]
-        print("done")
+                    bfs = [pos] + bfs
+
 
     def getAdjacent(self, pos):
 
@@ -74,12 +90,23 @@ class Processor:
         e = x + 1
 
         result = []
-        if n > 0 and n <= self.goal[1]:
-            result = result + [(x, n)]
-        if s > 0 and s <= self.goal[1]:
-            result = result + [(x, s)]
-        if w > 0 and w <= self.goal[0]:
-            result = result + [(w, y)]
-        if e > 0 and e <= self.goal[0]:
+        if 0 <= e <= self.goal[0]:
             result = result + [(e, y)]
+        if 0 <= s <= self.goal[1]:
+            result = result + [(x, s)]
+        if 0 <= w <= self.goal[0]:
+            result = result + [(w, y)]
+        if 0 <= n <= self.goal[1]:
+            result = result + [(x, n)]
         return result
+
+    def getPath(self, visitedPath, pos):
+        listPath = []
+        currPos = pos
+        nextPos = visitedPath[pos]
+        while nextPos != currPos:
+            listPath = listPath + [currPos]
+
+            currPos = nextPos
+            nextPos = visitedPath[nextPos]
+        return listPath + []
