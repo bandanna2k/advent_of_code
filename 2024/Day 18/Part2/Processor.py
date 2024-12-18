@@ -10,11 +10,10 @@ import re
 
 class Processor:
 
-    answer = 0
+    answer = None
 
     start = (0, 0)
     goal = (-1, -1)
-    walls = set()
 
     def getAnswer(self):
         return self.answer
@@ -22,57 +21,65 @@ class Processor:
     def __init__(self, filename, goal, cutoff):
 
         self.goal = goal
-        count = 0
+        walls = []
         with open(filename) as fp:
             for line in fp:
                 wall = line.split(',')
-                wall = (int(wall[1]), int(wall[0]))
-                self.walls.add(wall)
-                count = count + 1
-                if count >= cutoff:
-                    break
+                wall = (int(wall[0]), int(wall[1]))
+                walls = walls + [wall]
 
-        bfs = []
-        visited = set()
-        visitedPath = {}
+        limit = cutoff
+        newWalls = set()
+        while 1 == 1:
+            for i in range(limit):
+                newWalls.add(walls[i])
 
-        visited.add(self.start)
-        visitedPath[self.start] = self.start
+            bfs = []
+            visited = set()
+            visitedPath = {}
 
-        bfs = bfs + [self.start]
+            visited.add(self.start)
+            visitedPath[self.start] = self.start
 
-        while bfs:
-            current = bfs.pop()
+            bfs = bfs + [self.start]
 
-            adjacent2 = self.getAdjacent(current)
-            adjacent2 = {pos for pos in adjacent2 if not pos in self.walls}
-            for pos in adjacent2:
-                if not pos in visited:
-                    visited.add(pos)
+            path = None
+            while bfs and not path:
+                current = bfs.pop()
 
-                    if not pos in visitedPath:
-                        visitedPath[pos] = current
+                adjacent2 = self.getAdjacent(current)
+                adjacent2 = {pos for pos in adjacent2 if not pos in newWalls}
+                for pos in adjacent2:
+                    if not pos in visited:
+                        visited.add(pos)
 
-                    if pos == self.goal:
-                        path = self.getPath(visitedPath, pos)
-                        self.answer = path.__len__()
-                        print(path)
-                        for x in range(0,70):
-                            s = ""
-                            for y in range(0,70):
-                                if (x, y) in path:
-                                    s = "{}O".format(s)
-                                elif (x, y) in visited:
-                                    s = "{} ".format(s)
-                                elif (x, y) in self.walls:
-                                    s = "{}#".format(s)
-                                else:
-                                    s = "{}.".format(s)
-                            print(s)
-                        return
+                        if not pos in visitedPath:
+                            visitedPath[pos] = current
 
-                    bfs = [pos] + bfs
+                        if pos == self.goal:
+                            path = self.getPath(visitedPath, pos)
+                            # print("Path: {}".format(path))
+                            break
 
+                        bfs = [pos] + bfs
+            limit = limit + 1
+            if not path:
+                self.answer = walls[i]
+
+                # for y in range(0,70):
+                #     s = ""
+                #     for x in range(0,70):
+                #         if (x, y) == walls[i]:
+                #             s = "{}B".format(s)
+                #         elif (x, y) in visited:
+                #             s = "{} ".format(s)
+                #         elif (x, y) in walls:
+                #             s = "{}#".format(s)
+                #         else:
+                #             s = "{}.".format(s)
+                #     print(s)
+
+                return
 
     def getAdjacent(self, pos):
 
