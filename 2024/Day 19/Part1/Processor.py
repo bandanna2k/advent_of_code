@@ -29,25 +29,46 @@ class Processor:
             print("Building graph for {}".format(line))
 
             root = ([], line, [])   # Patterns used, Line left, Children
-            self.buildGraph(root)
-
-            print("Counting graph for {}".format(line))
-
-            countOfPaths = self.countCompletePaths(root)
-            if countOfPaths > 0:
+            if self.search(root):
                 self.answer = self.answer + 1
+
+
+    def search(self, currentNode):
+
+        line = currentNode[1]
+        children = currentNode[2]
+        if not line and not children:
+            print(currentNode)
+            return True
+
+        result = False
+        for pattern in self.patterns:
+            if line.startswith(pattern):
+                childNode = (currentNode[0] + [pattern], line[pattern.__len__()::], [])
+                currentNode[2].extend([childNode])
+
+                result = self.search(childNode)
+            if result:
+                break
+
+        return result
 
 
 
     def buildGraph(self, currentNode):
 
+        line = currentNode[1]
+        if not line:
+            return
+
         for pattern in self.patterns:
-            line = currentNode[1]
             if line.startswith(pattern):
                 childNode = (currentNode[0] + [pattern], line[pattern.__len__()::], [])
                 currentNode[2].extend([childNode])
 
                 self.buildGraph(childNode)
+
+        print(currentNode[0])
 
     def countCompletePaths(self, currentNode):
 

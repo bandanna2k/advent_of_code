@@ -8,7 +8,7 @@ class Tests(unittest.TestCase):
         test = Processor('test_input.txt')
         self.assertEqual(6, test.getAnswer())
 
-    def Xtest_the_real_input(self):
+    def test_the_real_input(self):
         test = Processor('real_input.txt')
         self.assertEqual(318, test.getAnswer())
 
