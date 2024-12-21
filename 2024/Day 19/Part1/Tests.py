@@ -1,6 +1,7 @@
 import unittest
 
-from Processor import Processor
+from PatternRemover import PatternRemover
+from ProcessorAttempt2 import Processor
 
 class Tests(unittest.TestCase):
 
@@ -8,7 +9,19 @@ class Tests(unittest.TestCase):
         test = Processor('test_input.txt')
         self.assertEqual(6, test.getAnswer())
 
+    def test_the_pattern_input(self):
+        test = PatternRemover('pattern_input.txt')
+        self.assertEqual(447, test.getAnswer())
+
+    def test_the_pattern_input2(self):
+        test = PatternRemover('pattern_input2.txt')
+        self.assertEqual(2, test.getAnswer())
+
     def test_the_real_input(self):
         test = Processor('real_input.txt')
         self.assertEqual(318, test.getAnswer())
+
+    def test_the_real_input2(self):
+        test = Processor('real_input2.txt')
+        self.assertEqual(207, test.getAnswer())
 
