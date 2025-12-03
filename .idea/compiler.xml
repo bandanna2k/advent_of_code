@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="education" target="21" />
+      <module name="education.2025" target="21" />
+      <module name="education.2025.main" target="21" />
+      <module name="education.2025.test" target="21" />
+      <module name="education.main" target="21" />
+      <module name="education.test" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
