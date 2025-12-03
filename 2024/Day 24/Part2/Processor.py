@@ -30,6 +30,41 @@ class Processor:
                     record = Equation(splits[0], splits[1], splits[2], splits[4].strip())
                     equations = equations + [record]
 
+
+        # 0-1
+        # 2-3
+        # 4-5
+        # 5-6
+
+        i1 = (0, 0)
+        i2 = (0, 0)
+        i3 = (0, 0)
+        i4 = (0, 0)
+        limit = len(equations)
+        while True:
+
+
+
+        for i1 in range(limit):
+            for i2 in range(limit):
+                if i1 == i2:
+                    continue
+
+                equationsCopy = equations.copy()
+                equation1 = equationsCopy[i1]
+                equation2 = equationsCopy[i2]
+
+                temp = equation1.c
+                equation1.c = equation2.c
+                equation2.c = temp
+
+                if self.solveEquations(knownValues, equations):
+                    print(equation1)
+                    print(equation2)
+
+
+    def solveEquations(self, knownValues, equations):
+
         totalCount = len(equations)
         for i in range(100):
             doneCount = 0
@@ -37,7 +72,7 @@ class Processor:
                 equation.maybeCalculate(knownValues)
 
                 if equation.complete:
-                    doneCount = doneCount + 1
+                    doneCount += 1
 
             if totalCount == doneCount:
                 for key, value in knownValues.items():
@@ -49,6 +84,10 @@ class Processor:
 
                 break
 
+        # Check if solvable
+        for equation in equations:
+            if not equation.complete:
+                return False
 
         # print(knownValues)
         # for equation in equations:
@@ -59,11 +98,11 @@ class Processor:
         zValues = []
         for k, v in knownValues.items():
             if k.startswith('x'):
-                xValues = xValues + [(k, v)]
+                xValues += [(k, v)]
             if k.startswith('y'):
-                yValues = yValues + [(k, v)]
+                yValues += [(k, v)]
             if k.startswith('z'):
-                zValues = zValues + [(k, v)]
+                zValues += [(k, v)]
 
         xValues.sort()
         yValues.sort()
@@ -73,21 +112,27 @@ class Processor:
         print(yValues)
         print(zValues)
 
-        # x = 0
-        # y = 0
-        # for i in range(len(xValues)):
-        #     xTuple = xValues[i]
-        #     yTuple = yValues[i]
-        #     xIsOn = xTuple[1]
-        #     yIsOn = yTuple[1]
-        #
-        #     if xIsOn:
-        #         x = x + pow(2, i)
-        #     if yIsOn:
-        #         y = y + pow(2, i)
-        #
-        # print(x)
-        # print(y)
+        x = 0
+        y = 0
+        z = 0
+        for i in range(len(xValues)):
+            xTuple = xValues[i]
+            yTuple = yValues[i]
+            zTuple = zValues[i]
+            xIsOn = xTuple[1]
+            yIsOn = yTuple[1]
+            zIsOn = zTuple[1]
+
+            if xIsOn:
+                x += pow(2, i)
+            if yIsOn:
+                y += pow(2, i)
+            if zIsOn:
+                z += pow(2, i)
+
+        print("{} + {} = {} ??? {}".format(x, y, x+y, z))
+
+        return (x+y) == z
 
         # badOnes = []
         # for i in range(len(xValues)):
