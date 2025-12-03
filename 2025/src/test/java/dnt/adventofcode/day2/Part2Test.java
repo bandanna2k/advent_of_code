@@ -61,14 +61,6 @@ public class Part2Test extends TestBase
         assertThat(sumInvalidIds.get()).isEqualTo(expected);
     }
 
-    static int power(int base, int exp) {
-        int result = 1;
-        for (int i = 0; i < exp; i++) {
-            result *= base;
-        }
-        return result;
-    }
-
     private boolean isInvalid2(long nValue)
     {
         String value = String.valueOf(nValue);

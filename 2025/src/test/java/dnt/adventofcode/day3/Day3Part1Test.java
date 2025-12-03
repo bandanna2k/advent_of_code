@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Part1Test extends TestBase
+public class Day3Part1Test extends TestBase
 {
     private static Stream<Arguments> part1() {
         return Stream.of(
@@ -28,7 +28,7 @@ public class Part1Test extends TestBase
     void part1(final String input, final long expected) throws IOException
     {
         AtomicLong sum = new  AtomicLong(0);
-        try (InputStream inputStream = Part1Test.class.getResourceAsStream(input))
+        try (InputStream inputStream = Day3Part1Test.class.getResourceAsStream(input))
         {
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
