@@ -19,7 +19,7 @@ public class Day3Part1Test extends TestBase
     private static Stream<Arguments> part1() {
         return Stream.of(
                 Arguments.of("/day3test.txt", 357),
-                Arguments.of("/day3real.txt", 357)
+                Arguments.of("/day3real.txt", 16858L)
         );
     }
 
