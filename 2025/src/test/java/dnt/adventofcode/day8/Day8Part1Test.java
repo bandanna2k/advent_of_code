@@ -80,109 +80,63 @@ public class Day8Part1Test extends TestBase
 //            System.out.println(distance);
         }
 
-        AtomicInteger connections = new AtomicInteger();
+        int connections = 0;
         List<Set<String>> circuits = new ArrayList<>();
         for (Distance distance : distances)
         {
+            System.out.println("-----");
 //            System.out.println(distance);
             String point1 = toString(distance.point1);
             String point2 = toString(distance.point2);
 
-            Optional<Set<String>> maybeCircuit = Optional.empty();
-            for (Set<String> circuit : circuits)
+            Set<String> mergedCircuit = new TreeSet<>();
+            Iterator<Set<String>> iterator = circuits.iterator();
+            while (iterator.hasNext())
             {
+                Set<String> circuit = iterator.next();
                 if (circuit.contains(point1) && circuit.contains(point2))
                 {
-//                    System.out.printf("Do nothing. %s %s%n", point1, point2);
-                    connections.getAndIncrement();
-                    maybeCircuit = Optional.of(circuit);
-                    break;
+                    //System.out.printf("Do nothing. %s %s%n", point1, point2);
+                    System.out.println("Removing: " + circuit);
+                    iterator.remove();
+                    mergedCircuit.addAll(circuit);
                 }
                 else if (circuit.contains(point1) || circuit.contains(point2))
                 {
-//                    System.out.printf("Add to circuit before. %s%n", circuit);
-                    circuit.add(point1);
-                    circuit.add(point2);
-//                    System.out.printf("Add to circuit after. %s%n", circuit);
-                    maybeCircuit = Optional.of(circuit);
-                    connections.getAndIncrement();
-                    break;
+                    System.out.println("Removing: " + circuit);
+                    iterator.remove();
+//                    System.out.printf("Merging circuit. Before: %s%n", mergedCircuit);
+                    mergedCircuit.addAll(circuit);
+                    mergedCircuit.add(point1);
+                    mergedCircuit.add(point2);
+//                    System.out.printf("Merging circuit. After: %s%n", mergedCircuit);
                 }
             }
 
-//            System.out.println("Connections: " + connections);
-            if (connections.get() >= (maxConnections))
+            if(mergedCircuit.isEmpty())
             {
-                break;
-            }
-
-            maybeCircuit.ifPresentOrElse(
-                    c -> {},
-                    () ->
-                    {
-//                        System.out.printf("New circuit. %s %s%n", point1, point2);
-                        Set<String> newCircuit = new HashSet<>();
-                        newCircuit.add(point1);
-                        newCircuit.add(point2);
-                        circuits.add(newCircuit);
-                        connections.getAndIncrement();
-                    });
-
-//            System.out.println("Connections: " + connections);
-            if (connections.get() >= (maxConnections))
-            {
-                break;
-            }
-            System.out.println("Circuit sizes: " + circuits.stream().map(Set::size).map(String::valueOf).collect(Collectors.joining(",")));
-        }
-
-        boolean merged;
-        do
-        {
-            merged = false;
-            int i = -1;
-            int j = -1;
-            Set<String> newCircuit = new HashSet<>();
-            try
-            {
-                for (i = 0; i < circuits.size(); i++)
-                {
-                    for (j = 0; j < circuits.size(); j++)
-                    {
-                        if(i == j) continue;
-
-                        Set<String> setI = circuits.get(i);
-                        Set<String> setJ = circuits.get(j);
-                        Set<String> intersect = setI.stream().filter(setJ::contains).collect(Collectors.toSet());
-                        if(!intersect.isEmpty())
-                        {
-                            newCircuit.addAll(setI);
-                            newCircuit.addAll(setJ);
-                            System.out.printf("Merging %s = %s + %s%n", newCircuit, setI, setJ);
-                            throw new MergingException();
-                        }
-                    }
-                }
-            }
-            catch (MergingException ex)
-            {
-                Set<String> removedMax = circuits.remove(Math.max(i, j));
-                Set<String> removedMin = circuits.remove(Math.min(i, j));
+                TreeSet<String> newCircuit = new TreeSet<>();
+                newCircuit.add(point1);
+                newCircuit.add(point2);
+                System.out.printf("New circuit. %s%n", newCircuit);
                 circuits.add(newCircuit);
-                merged = true;
             }
+            else
+            {
+                System.out.println("Putting: " + mergedCircuit);
+                circuits.add(mergedCircuit);
+            }
+
+            System.out.println("Circuit sizes: " + circuits.stream().map(Set::size).map(String::valueOf).collect(Collectors.joining(",")));
+
+            connections++;
+            if(connections >= maxConnections) break;
         }
-        while(merged);
 
         circuits.sort(Comparator.comparingInt(strings -> -strings.size()));
         System.out.println(circuits.stream().map(Set::size).map(String::valueOf).collect(Collectors.joining(",")));
 
         int total = circuits.get(0).size() * circuits.get(1).size() * circuits.get(2).size();
-        if (maxConnections == 1000)
-        {
-            int cheat = 25272;
-            assertThat(total).describedAs("Too low").isGreaterThan(cheat);
-        }
         assertThat(total).isEqualTo(expected);
     }
 
