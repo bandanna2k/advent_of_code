@@ -98,9 +98,10 @@ public class Cheat2
     {
         long total = 1;
         int i = 0;
+        String collect = circuits.stream().map(set -> String.valueOf(set.size())).collect(Collectors.joining(","));
+        System.out.println(collect);
         for (final Set<JunctionBox> circuit : circuits)
         {
-            System.out.println(circuit.size());
             total *= circuit.size();
             i++;
             if (i == 3)
@@ -186,8 +187,10 @@ public class Cheat2
     protected String runPart1(final List<String> input)
     {
         final List<JunctionBox> junctionBoxes = parseJunctionBoxes(input);
-        final List<Set<JunctionBox>> circuits = calculateCircuits(calculateDistances(junctionBoxes), junctionBoxes,
-                1000);
+        TreeMap<Double, Connection> connectionDistances = calculateDistances(junctionBoxes);
+        System.out.println(connectionDistances);
+        final List<Set<JunctionBox>> circuits = calculateCircuits(connectionDistances, junctionBoxes,
+                10);
         sortCircuits(circuits);
         return String.valueOf(calculateProduct(circuits));
     }
@@ -195,7 +198,7 @@ public class Cheat2
     public static void main(final String... args) throws IOException
     {
         List<String> points = new ArrayList<>();
-        try (InputStream inputStream = Day8Part1Test.class.getResourceAsStream("/day8real.txt"))
+        try (InputStream inputStream = Day8Part1Test.class.getResourceAsStream("/day8test.txt"))
         {
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);

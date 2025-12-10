@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -53,7 +52,7 @@ public class Day8Part1Test extends TestBase
         }
 
         // Calc distances
-        Set<Distance> distances = new TreeSet<>((d1, d2) -> -Double.compare(d2.distance, d1.distance));
+        Set<Distance> allDistances = new TreeSet<>((d1, d2) -> -Double.compare(d2.distance, d1.distance));
         for (int pointA = 0; pointA < size; pointA++)
         {
             for (int pointB = 0; pointB < size; pointB++)
@@ -71,21 +70,25 @@ public class Day8Part1Test extends TestBase
                 double dist = distance(A.point, B.point);
                 A.distances[pointB] = dist;
                 B.distances[pointA] = dist;
-                distances.add(new Distance(A.point, B.point, dist));
+                allDistances.add(new Distance(A.point, B.point, dist));
             }
         }
 
-        for (Distance distance : distances)
+        Set<Distance> trimmedDistances = new TreeSet<>((d1, d2) -> -Double.compare(d2.distance, d1.distance));
+        int count = 0;
+        for (Distance distance : allDistances)
         {
-//            System.out.println(distance);
+            if(++count > maxConnections) break;
+
+            //            System.out.println(distance);
+            trimmedDistances.add(distance);
         }
 
-        int connections = 0;
         List<Set<String>> circuits = new ArrayList<>();
-        for (Distance distance : distances)
+        for (Distance distance : trimmedDistances)
         {
             System.out.println("-----");
-//            System.out.println(distance);
+            System.out.println(distance);
             String point1 = toString(distance.point1);
             String point2 = toString(distance.point2);
 
@@ -128,9 +131,6 @@ public class Day8Part1Test extends TestBase
             }
 
             System.out.println("Circuit sizes: " + circuits.stream().map(Set::size).map(String::valueOf).collect(Collectors.joining(",")));
-
-            connections++;
-            if(connections >= maxConnections) break;
         }
 
         circuits.sort(Comparator.comparingInt(strings -> -strings.size()));
@@ -138,6 +138,19 @@ public class Day8Part1Test extends TestBase
 
         int total = circuits.get(0).size() * circuits.get(1).size() * circuits.get(2).size();
         assertThat(total).isEqualTo(expected);
+    }
+
+    private void assertCircuits(List<Set<String>> circuits)
+    {
+        Set<String> junctionBoxes = new TreeSet<>();
+        circuits.forEach(circuit -> {
+            circuit.forEach(junctionBox -> {
+                if(junctionBoxes.contains(junctionBox)) {
+                    throw new AssertionError("Duplicate junction box should not exist.");
+                }
+                junctionBoxes.add(junctionBox);
+            });
+        });
     }
 
     private static String toString(int[] point)
