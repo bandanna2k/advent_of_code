@@ -98,8 +98,8 @@ public class Cheat2
     {
         long total = 1;
         int i = 0;
-//        String collect = circuits.stream().map(set -> String.valueOf(set.size())).collect(Collectors.joining(","));
-//        System.out.println(collect);
+        String collect = circuits.stream().map(set -> String.valueOf(set.size())).collect(Collectors.joining(","));
+        System.out.println(collect);
         for (final Set<JunctionBox> circuit : circuits)
         {
             total *= circuit.size();

@@ -1,7 +1,6 @@
 package dnt.adventofcode.day8;
 
 import dnt.adventofcode.TestBase;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -25,22 +24,6 @@ public class Day8Part1Test extends TestBase
                 Arguments.of("/day8test.txt", 10, 40),
                 Arguments.of("/day8real.txt", 1000, 69192)
         );
-    }
-
-    @Test
-    void comparingSetOfStrings()
-    {
-        Set<String> set1 = new TreeSet<>();
-        set1.add("b");
-        set1.add("a");
-        Set<String> set2 = new HashSet<>();
-        set2.add("a");
-        set2.add("b");
-        assertThat(set1).isEqualTo(set2);
-
-        Set<String> set3 = new HashSet<>();
-        set3.add("a");
-        assertThat(set3).isNotEqualTo(set1);
     }
 
     @ParameterizedTest(name = "Expected {1}")
@@ -104,52 +87,51 @@ public class Day8Part1Test extends TestBase
         List<Set<String>> circuits = new ArrayList<>();
         for (Distance distance : trimmedDistances)
         {
-            TreeSet<String> set = new TreeSet<>();
-            set.add(toString(distance.point1));
-            set.add(toString(distance.point2));
-            circuits.add(set);
-        }
+            System.out.println("-----");
+            System.out.println(distance);
+            String point1 = toString(distance.point1);
+            String point2 = toString(distance.point2);
 
-        boolean matchFound;
-        do
-        {
-            matchFound = false;
-            try
+            Set<String> mergedCircuit = new TreeSet<>();
+            Iterator<Set<String>> iterator = circuits.iterator();
+            while (iterator.hasNext())
             {
-                for (int j = 0; j < circuits.size(); j++)
+                Set<String> circuit = iterator.next();
+                if (circuit.contains(point1) && circuit.contains(point2))
                 {
-                    Set<String> circuit1 = circuits.get(j);
-                    for (int i = 0; i < circuits.size(); i++)
-                    {
-                        if (i == j)
-                        {
-                            continue;
-                        }
-
-                        Set<String> circuit2 = circuits.get(i);
-                        for (String junctionBox : circuit2)
-                        {
-                            if (circuit1.contains(junctionBox))
-                            {
-                                TreeSet<String> merged = new TreeSet<>();
-                                merged.addAll(circuit1);
-                                merged.addAll(circuit2);
-                                circuits.remove(Math.max(i, j));
-                                circuits.remove(Math.min(i, j));
-                                circuits.add(merged);
-                                throw new MatchFoundException();
-                            }
-                        }
-                    }
+                    //System.out.printf("Do nothing. %s %s%n", point1, point2);
+                    System.out.println("Removing: " + circuit);
+                    iterator.remove();
+                    mergedCircuit.addAll(circuit);
+                }
+                else if (circuit.contains(point1) || circuit.contains(point2))
+                {
+                    System.out.println("Removing: " + circuit);
+                    iterator.remove();
+//                    System.out.printf("Merging circuit. Before: %s%n", mergedCircuit);
+                    mergedCircuit.addAll(circuit);
+                    mergedCircuit.add(point1);
+                    mergedCircuit.add(point2);
+//                    System.out.printf("Merging circuit. After: %s%n", mergedCircuit);
                 }
             }
-            catch (MatchFoundException e) {
-                matchFound = true;
+
+            if(mergedCircuit.isEmpty())
+            {
+                TreeSet<String> newCircuit = new TreeSet<>();
+                newCircuit.add(point1);
+                newCircuit.add(point2);
+                System.out.printf("New circuit. %s%n", newCircuit);
+                circuits.add(newCircuit);
             }
+            else
+            {
+                System.out.println("Putting: " + mergedCircuit);
+                circuits.add(mergedCircuit);
+            }
+
+            System.out.println("Circuit sizes: " + circuits.stream().map(Set::size).map(String::valueOf).collect(Collectors.joining(",")));
         }
-        while(matchFound);
-
-
 
         circuits.sort(Comparator.comparingInt(strings -> -strings.size()));
         System.out.println(circuits.stream().map(Set::size).map(String::valueOf).collect(Collectors.joining(",")));
@@ -267,7 +249,7 @@ public class Day8Part1Test extends TestBase
         }
     }
 
-    private static final class MatchFoundException extends Exception
+    private static class MergingException extends Throwable
     {
     }
 }
