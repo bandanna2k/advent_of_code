@@ -22,6 +22,7 @@ public class Day8Part1Test extends TestBase
     {
         return Stream.of(
                 Arguments.of("/day8test.txt", 10, 40),
+                Arguments.of("/day8test.txt", 10, 40),
                 Arguments.of("/day8real.txt", 1000, 69192)
         );
     }
@@ -160,9 +161,9 @@ public class Day8Part1Test extends TestBase
 
     private static double distance(int[] a, int[] b)
     {
-        int x2_x1 = b[0] - a[0];
-        int y2_y1 = b[1] - a[1];
-        int z2_z1 = b[2] - a[2];
+        long x2_x1 = b[0] - a[0];
+        long y2_y1 = b[1] - a[1];
+        long z2_z1 = b[2] - a[2];
         double result = (x2_x1 * x2_x1) + (y2_y1 * y2_y1) + (z2_z1 * z2_z1);
         return Math.sqrt(result);
     }
