@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static dnt.common.BigDecimalUtils.isWholeNumber;
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
+import static dnt.maths.problems600.problem655.PalindromeUtils.isPalindrome;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -34,14 +35,11 @@ public class TestLength32
         ModuliFor8Digits outer17to24 = new ModuliFor8Digits(17, BD10000019.intValue());
         ModuliFor8Digits outer25to32 = new ModuliFor8Digits(25, BD10000019.intValue());
 
-        AtomicInteger counter = new AtomicInteger();
         System.out.println(Instant.now() + " Start");
         PalindromeExtractor extractor = new PalindromeExtractorEven(outer25to32, outer17to24, outer9to16, outer1to8,
-                p ->
-                {
-                    System.out.println(Instant.now() + " First palindrome " + p);
-                    if (counter.getAndIncrement() > 20)
-                        throw new RuntimeException("Testing 20 palindromes.");
+                p -> {
+                    assertThat(isPalindrome(p)).describedAs("Not palindrome " + p).isTrue();
+                    System.out.println(Instant.now() + " Palindrome found " + p);
                 });
         extractor.go();
         assertThat(extractor.getPalindromeCount()).isEqualTo(1);

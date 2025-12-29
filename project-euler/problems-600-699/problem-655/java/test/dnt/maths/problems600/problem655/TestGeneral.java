@@ -8,6 +8,7 @@ import java.time.Instant;
 
 import static dnt.common.BigDecimalUtils.*;
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
+import static dnt.maths.problems600.problem655.PalindromeUtils.isPalindrome;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -47,10 +48,16 @@ public class TestGeneral
     }
 
     @Test
-    public void testPalindrome()
+    public void testPalindromes()
     {
-        BigDecimal test = new BigDecimal("10000000024260950590624200000001");
+        assertIsPalindromeDivisible("10000000303875800857830300000001");
+    }
+
+    private static void assertIsPalindromeDivisible(String input)
+    {
+        BigDecimal test = new BigDecimal(input);
         BigDecimal divided = test.divide(BD10000019);
         assertTrue(isWholeNumber(divided));
+        assertTrue(isPalindrome(test));
     }
 }

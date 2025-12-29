@@ -13,6 +13,7 @@ public class PalindromeUtilsTest
     @Test
     public void testIsPalindromeByString()
     {
+        assertThat(isPalindromeByStringCompare(new BigDecimal("10000000303875800857830300000001"))).isTrue();
         assertThat(isPalindromeByStringCompare(new BigDecimal("1234321"))).isTrue();
         assertThat(isPalindromeByStringCompare(new BigDecimal("12344321"))).isTrue();
         assertThat(isPalindromeByStringCompare(new BigDecimal("1"))).isTrue();

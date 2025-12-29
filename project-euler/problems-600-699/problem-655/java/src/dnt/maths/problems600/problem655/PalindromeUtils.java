@@ -6,7 +6,7 @@ public abstract class PalindromeUtils
 {
     public static boolean isPalindrome(BigDecimal value)
     {
-        return isPalindromeByStringCompare(value);
+        return isPalindromeByStringCompare(value.setScale(0));
     }
 
     static boolean isPalindromeByStringCompare(BigDecimal value)

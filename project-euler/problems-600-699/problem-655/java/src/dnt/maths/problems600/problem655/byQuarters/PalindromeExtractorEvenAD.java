@@ -3,10 +3,10 @@ package dnt.maths.problems600.problem655.byQuarters;
 import java.math.BigDecimal;
 import java.util.function.Consumer;
 
-import static dnt.common.IntegerUtils.reverseDigits;
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
 import static dnt.maths.problems600.problem655.byQuarters.ModulusRecord.modulus;
 import static dnt.maths.problems600.problem655.byQuarters.ModulusRecord.number;
+import static dnt.maths.problems600.problem655.byQuarters.ReverseDigits.REVERSE_DIGITS;
 
 public class PalindromeExtractorEvenAD implements PalindromeExtractor
 {
@@ -33,7 +33,7 @@ public class PalindromeExtractorEvenAD implements PalindromeExtractor
         {
             int[] recordA = moduliA.get(a);
 
-            int d = reverseDigits(a);
+            int d = REVERSE_DIGITS[a];
             int[] recordD = moduliD.get(d);
 
             int modulusSum = modulus(recordA) + modulus(recordD);
