@@ -14,9 +14,9 @@ import static dnt.common.BigDecimalUtils.createFirstBigDecimal;
  * quarter and then add the moduli up to get the moduli
  * for the large number.
  */
-public class ModuliFor8Digits extends BaseModuli implements ModuliCalculator
+public class ModuliFor8Digits implements ModuliCalculator
 {
-    private final List<ModulusRecord> modulusForA = new ArrayList<>();
+    private final List<int[]> modulusForA = new ArrayList<>();
 
     public ModuliFor8Digits(int charsFrom, int intDivisor)
     {
@@ -28,10 +28,10 @@ public class ModuliFor8Digits extends BaseModuli implements ModuliCalculator
         int intModA = bigModA.intValue();
         int intModAIncrement = bigModA.intValue() % intDivisor;
 
-        modulusForA.add(new ModulusRecord(0, 0));
+        modulusForA.add(new int[] {0, 0});
         for (int a = 1; a < 100_000_000; a++)
         {
-            modulusForA.add(new ModulusRecord(a, intModA));
+            modulusForA.add(new int[] {a, intModA});
 
             intModA = (intModA + intModAIncrement);
             intModA = intModA % intDivisor;
@@ -39,7 +39,7 @@ public class ModuliFor8Digits extends BaseModuli implements ModuliCalculator
         System.out.print("INFO:Finished creating moduli class.\n");
     }
 
-    public ModulusRecord get(int i)
+    public int[] get(int i)
     {
         return modulusForA.get(i);
     }
@@ -58,5 +58,15 @@ public class ModuliFor8Digits extends BaseModuli implements ModuliCalculator
     public int getDigitCount()
     {
         return 8;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "ModuliFor8Digits{" +
+                "modulusForA=" + modulusForA.size() +
+                "getFirst=" + getFirst() +
+                "getLast=" + getLast() +
+                '}';
     }
 }

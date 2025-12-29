@@ -2,6 +2,7 @@ package dnt.maths.problems600.problem655.byQuarters;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static dnt.common.BigDecimalUtils.createFirstBigDecimal;
@@ -14,9 +15,9 @@ import static dnt.common.BigDecimalUtils.createFirstBigDecimal;
  * quarter and then add the moduli up to get the moduli
  * for the large number.
  */
-public class ModuliCalculatorImpl extends BaseModuli implements ModuliCalculator
+public class ModuliCalculatorImpl implements ModuliCalculator
 {
-    private final List<ModulusRecord> modulusForA = new ArrayList<>();
+    private final List<int[]> modulusForA = new ArrayList<>();
     private final int digitCount;
 
     public ModuliCalculatorImpl(int digitCount, int charsFrom, int intDivisor)
@@ -35,18 +36,19 @@ public class ModuliCalculatorImpl extends BaseModuli implements ModuliCalculator
         int intModA = bigModA.intValue();
         int intModAIncrement = bigModA.intValue() % intDivisor;
 
-        modulusForA.add(new ModulusRecord(0, 0));
+        modulusForA.add(new int[] {0, 0});
         for (int a = 1; a < arraySize; a++)
         {
-            modulusForA.add(new ModulusRecord(a, intModA));
+            modulusForA.add(new int[] {a, intModA});
 
             intModA = (intModA + intModAIncrement);
             intModA = intModA % intDivisor;
         }
-        System.out.print("INFO:Finished creating moduli class.\n");
+        System.out.printf("INFO:Finished creating moduli class. %s %s %n",
+                Arrays.toString(modulusForA.getFirst()), Arrays.toString(modulusForA.getLast()));
     }
 
-    public ModulusRecord get(int i)
+    public int[] get(int i)
     {
         return modulusForA.get(i);
     }
@@ -65,5 +67,14 @@ public class ModuliCalculatorImpl extends BaseModuli implements ModuliCalculator
     public int getLast()
     {
         return ((int) Math.pow(10, digitCount)) - 1;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "ModuliCalculatorImpl{" +
+                "modulusForA=" + modulusForA.size() +
+                ", digitCount=" + digitCount +
+                "} " + super.toString();
     }
 }

@@ -34,7 +34,7 @@ public abstract class BigDecimalUtils
         throw new RuntimeException("Failed to find firstDivisibleNumber");
     }
 
-    public static BigDecimal firstDivisibleNumberAfter(BigDecimal base, int nDivisor)
+    public static BigDecimal firstDivisibleNumberAfter(BigDecimal base, BigDecimal divisor)
     {
 /*
 BigDecimal x = new BigDecimal(100);
@@ -43,9 +43,13 @@ if (BigDecimal.ZERO.compareTo(remainder) == 0) {
     System.out.println("x can be divided by 20");
 }
  */
-        BigDecimal divisor = new BigDecimal(nDivisor);
         BigDecimal remainder = base.remainder(divisor);
         return base.subtract(remainder).add(divisor);
+    }
+    public static BigDecimal firstDivisibleNumberAfter(BigDecimal base, int nDivisor)
+    {
+        BigDecimal divisor = new BigDecimal(nDivisor);
+        return firstDivisibleNumberAfter(base, divisor);
     }
 
     public static BigDecimal createFirstBigDecimal(int chars)

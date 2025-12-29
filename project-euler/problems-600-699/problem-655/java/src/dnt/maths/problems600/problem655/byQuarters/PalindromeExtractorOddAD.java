@@ -5,6 +5,8 @@ import java.util.function.Consumer;
 
 import static dnt.common.IntegerUtils.reverseDigits;
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
+import static dnt.maths.problems600.problem655.byQuarters.ModulusRecord.modulus;
+import static dnt.maths.problems600.problem655.byQuarters.ModulusRecord.number;
 
 public class PalindromeExtractorOddAD implements PalindromeExtractor
 {
@@ -32,22 +34,22 @@ public class PalindromeExtractorOddAD implements PalindromeExtractor
         int lastA = moduliA.getLast();
         for (int a = firstA; a <= lastA; a++)
         {
-            ModulusRecord recordA = moduliA.get(a);
+            int[] recordA = moduliA.get(a);
 
             int d = reverseDigits(a);
-            ModulusRecord recordD = moduliD.get(d);
+            int[] recordD = moduliD.get(d);
 
             for (int i = 0; i < 10; i++)
             {
-                ModulusRecord recordMid = moduliMid.get(i);
+                int[] recordMid = moduliMid.get(i);
 
-                int modulusSum = recordA.modulus() + recordMid.modulus() + recordD.modulus();
+                int modulusSum = modulus(recordA) + modulus(recordMid) + modulus(recordD);
                 if (modulusSum % BD10000019.intValue() == 0)
                 {
                     BigDecimal bigPalindrome = new BigDecimal(
-                            String.format("%0" + moduliA.getDigitCount() + "d", recordA.number()) +
-                                    String.format("%0" + moduliMid.getDigitCount() + "d", recordMid.number()) +
-                                    String.format("%0" + moduliD.getDigitCount() + "d", recordD.number())
+                            String.format("%0" + moduliA.getDigitCount() + "d", number(recordA)) +
+                                    String.format("%0" + moduliMid.getDigitCount() + "d", number(recordMid)) +
+                                    String.format("%0" + moduliD.getDigitCount() + "d", number(recordD))
                     );
                     palindromeConsumer.accept(bigPalindrome);
                     palindromeCount++;

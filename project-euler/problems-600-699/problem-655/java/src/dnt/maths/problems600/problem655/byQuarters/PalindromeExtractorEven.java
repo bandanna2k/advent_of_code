@@ -5,6 +5,8 @@ import java.util.function.Consumer;
 
 import static dnt.common.IntegerUtils.reverseDigits;
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
+import static dnt.maths.problems600.problem655.byQuarters.ModulusRecord.modulus;
+import static dnt.maths.problems600.problem655.byQuarters.ModulusRecord.number;
 
 public class PalindromeExtractorEven implements PalindromeExtractor
 {
@@ -26,6 +28,10 @@ public class PalindromeExtractorEven implements PalindromeExtractor
         this.moduliB = moduliB;
         this.moduliC = moduliC;
         this.moduliD = moduliD;
+        System.out.println("Modula A: " + moduliA);
+        System.out.println("Modula B: " + moduliB);
+        System.out.println("Modula C: " + moduliC);
+        System.out.println("Modula D: " + moduliD);
         assert moduliA.getDigitCount() == moduliD.getDigitCount();
         assert moduliB.getDigitCount() == moduliC.getDigitCount();
     }
@@ -36,32 +42,32 @@ public class PalindromeExtractorEven implements PalindromeExtractor
         int lastA = moduliA.getLast();
         for (int a = firstA; a <= lastA; a++)
         {
-            ModulusRecord recordA = moduliA.get(a);
+            int[] recordA = moduliA.get(a);
 
             int d = reverseDigits(a);
-            ModulusRecord recordD = moduliD.get(d);
+            int[] recordD = moduliD.get(d);
 
             int lastB = moduliB.getLast();
             int lastC = moduliC.getLast();
             assert lastB == lastC;
             for (int j = 0; j <= lastB; j++)
             {
-                ModulusRecord recordB = moduliB.get(j);
+                int[] recordB = moduliB.get(j);
 
                 int c = reverseDigits(j);
-                ModulusRecord recordC = moduliC.get(c);
+                int[] recordC = moduliC.get(c);
 
-                int modulusSum = recordA.modulus() + recordB.modulus() + recordC.modulus() + recordD.modulus();
+                int modulusSum = modulus(recordA) + modulus(recordB) + modulus(recordC) + modulus(recordD);
                 if (modulusSum % BD10000019.intValue() == 0)
                 {
 //                    System.out.printf("Palindrome found. %s %s %s %s\n", recordA, recordB, recordC, recordD);
 //                    System.out.printf("%08d%08d%08d%08d %% 10000019\n", recordA.number(), recordB.number(), recordC.number(), recordD.number());
 //
                     BigDecimal bigPalindrome = new BigDecimal(
-                            String.format("%0" + moduliA.getDigitCount() + "d", recordA.number()) +
-                                    String.format("%0" + moduliB.getDigitCount() + "d", recordB.number()) +
-                                    String.format("%0" + moduliC.getDigitCount() + "d", recordC.number()) +
-                                    String.format("%0" + moduliD.getDigitCount() + "d", recordD.number())
+                            String.format("%0" + moduliA.getDigitCount() + "d", number(recordA)) +
+                                    String.format("%0" + moduliB.getDigitCount() + "d", number(recordB)) +
+                                    String.format("%0" + moduliC.getDigitCount() + "d", number(recordC)) +
+                                    String.format("%0" + moduliD.getDigitCount() + "d", number(recordD))
                     );
                     palindromeConsumer.accept(bigPalindrome);
                     palindromeCount++;
