@@ -13,6 +13,7 @@ import java.util.function.Consumer;
 
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
 
+@Deprecated // WIP
 public class PalindromeExtractorMultiThreadedEven implements PalindromeExtractor
 {
     private static final int DIVISOR1 = BD10000019.intValue();
@@ -96,9 +97,6 @@ public class PalindromeExtractorMultiThreadedEven implements PalindromeExtractor
                 modulusSum == DIVISOR3 ||
                 modulusSum == DIVISOR4)
         {
-//                    System.out.printf("Palindrome found. %s %s %s %s\n", recordA, recordB, recordC, recordD);
-//                    System.out.printf("%08d%08d%08d%08d %% 10000019\n", recordA.number(), recordB.number(), recordC.number(), recordD.number());
-//
             BigDecimal bigPalindrome = new BigDecimal(
                     String.format("%0" + moduliA.getDigitCount() + "d", (a)) +
                             String.format("%0" + moduliB.getDigitCount() + "d", (b)) +

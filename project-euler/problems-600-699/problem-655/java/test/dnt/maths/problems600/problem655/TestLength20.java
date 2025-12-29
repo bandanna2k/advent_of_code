@@ -38,7 +38,7 @@ public class TestLength20
         ModuliCalculator calculatorC = new ModuliCalculatorImpl(2, 9, BD10000019.intValue());
         ModuliCalculator calculatorD = new ModuliCalculatorImpl(8, 1, BD10000019.intValue());
 
-        PalindromeExtractor extractor = new PalindromeExtractorMultiThreadedEven(calculatorA, calculatorB, calculatorC, calculatorD,
+        PalindromeExtractor extractor = new PalindromeExtractorEven(calculatorA, calculatorB, calculatorC, calculatorD,
                 x ->
                 {
                     progress.progress(x);

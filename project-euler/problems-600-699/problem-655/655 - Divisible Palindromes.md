@@ -27,7 +27,7 @@ less than means
 | 15    | 0     | .371 secs      |
 | 16    | 8     | 21 secs        |
 | 17    | 91    | 5 secs         |
-| 18    | 101   | ? secs         | 
+| 18    | 101   | 40 secs        | 
 | 19    | 924   | 1 min, 3 secs  |
 | 20    | 711   | 1 min, 28 secs |
 | 21    | 895   | 5 min, 21 secs |

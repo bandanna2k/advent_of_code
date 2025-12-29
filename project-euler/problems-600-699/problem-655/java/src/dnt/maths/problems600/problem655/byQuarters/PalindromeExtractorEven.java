@@ -49,6 +49,7 @@ public class PalindromeExtractorEven implements PalindromeExtractor
     {
         int firstA = moduliA.getFirst();
         int lastA = moduliA.getLast();
+        int lastB = moduliB.getLast();
 
         for (int a = firstA; a <= lastA; a++)
         {
@@ -57,7 +58,6 @@ public class PalindromeExtractorEven implements PalindromeExtractor
             int d = reverseDigitsAD.reverseDigits[a];
             int modD = moduliD.get(d);
 
-            int lastB = moduliB.getLast();
             for (int b = 0; b <= lastB; b++)
             {
                 int modB = moduliB.get(b);
@@ -84,16 +84,13 @@ public class PalindromeExtractorEven implements PalindromeExtractor
                 modulusSum == DIVISOR3 ||
                 modulusSum == DIVISOR4)
         {
-//                    System.out.printf("Palindrome found. %s %s %s %s\n", recordA, recordB, recordC, recordD);
-//                    System.out.printf("%08d%08d%08d%08d %% 10000019\n", recordA.number(), recordB.number(), recordC.number(), recordD.number());
-//
-            BigDecimal bigPalindrome = new BigDecimal(
-                    String.format("%0" + moduliA.getDigitCount() + "d", (a)) +
-                            String.format("%0" + moduliB.getDigitCount() + "d", (b)) +
-                            String.format("%0" + moduliC.getDigitCount() + "d", (c)) +
-                            String.format("%0" + moduliD.getDigitCount() + "d", (d))
-            );
-            palindromeConsumer.accept(bigPalindrome);
+//            BigDecimal bigPalindrome = new BigDecimal(
+//                    String.format("%0" + moduliA.getDigitCount() + "d", (a)) +
+//                            String.format("%0" + moduliB.getDigitCount() + "d", (b)) +
+//                            String.format("%0" + moduliC.getDigitCount() + "d", (c)) +
+//                            String.format("%0" + moduliD.getDigitCount() + "d", (d))
+//            );
+//            palindromeConsumer.accept(bigPalindrome);
             palindromeCount++;
         }
     }

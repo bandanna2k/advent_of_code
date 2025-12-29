@@ -51,6 +51,8 @@ public class PalindromeExtractorOdd implements PalindromeExtractor
     {
         int firstA = moduliA.getFirst();
         int lastA = moduliA.getLast();
+        int lastB = moduliB.getLast();
+
         for (int a = firstA; a <= lastA; a++)
         {
             int modA = moduliA.get(a);
@@ -58,7 +60,6 @@ public class PalindromeExtractorOdd implements PalindromeExtractor
             int d = reverseDigitsAD.reverseDigits[a];
             int modD = moduliD.get(d);
 
-            int lastB = moduliB.getLast();
             for (int b = 0; b <= lastB; b++)
             {
                 int modB = moduliB.get(b);
