@@ -17,7 +17,7 @@ import static dnt.common.BigDecimalUtils.createFirstBigDecimal;
  */
 public class ModuliCalculatorImpl implements ModuliCalculator
 {
-    private final List<int[]> modulusForA = new ArrayList<>();
+    private final int[] moduli;
     private final int digitCount;
 
     public ModuliCalculatorImpl(int digitCount, int charsFrom, int intDivisor)
@@ -27,6 +27,7 @@ public class ModuliCalculatorImpl implements ModuliCalculator
         System.out.printf("INFO:Start creating moduli class for chars %d to %d.\n", charsFrom, charsFrom + digitCount - 1);
 
         int arraySize = (int) Math.pow(10, digitCount);
+        moduli = new int[arraySize];
 
         BigDecimal bigA = createFirstBigDecimal(charsFrom);
         BigDecimal bigModA = bigA.remainder(new BigDecimal(intDivisor));
@@ -36,21 +37,22 @@ public class ModuliCalculatorImpl implements ModuliCalculator
         int intModA = bigModA.intValue();
         int intModAIncrement = bigModA.intValue() % intDivisor;
 
-        modulusForA.add(new int[] {0, 0});
+        //modulusForA.add(new int[] {0, 0});
+        moduli[0] = 0;
         for (int a = 1; a < arraySize; a++)
         {
-            modulusForA.add(new int[] {a, intModA});
+            moduli[a] = intModA;
 
             intModA = (intModA + intModAIncrement);
             intModA = intModA % intDivisor;
         }
-        System.out.printf("INFO:Finished creating moduli class. %s %s %n",
-                Arrays.toString(modulusForA.getFirst()), Arrays.toString(modulusForA.getLast()));
+        System.out.printf("INFO:Finished creating moduli class. %d %d %n",
+                moduli[0], moduli[moduli.length - 1]);
     }
 
-    public int[] get(int i)
+    public int get(int i)
     {
-        return modulusForA.get(i);
+        return moduli[i];
     }
 
     @Override
@@ -73,7 +75,7 @@ public class ModuliCalculatorImpl implements ModuliCalculator
     public String toString()
     {
         return "ModuliCalculatorImpl{" +
-                "modulusForA=" + modulusForA.size() +
+                "moduli.length=" + moduli.length +
                 ", digitCount=" + digitCount +
                 "} " + super.toString();
     }

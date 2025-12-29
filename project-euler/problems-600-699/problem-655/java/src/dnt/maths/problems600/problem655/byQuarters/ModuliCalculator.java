@@ -6,7 +6,7 @@ public interface ModuliCalculator
 
     int getLast();
 
-    int[] get(int i);
+    int get(int i);
 
     int getDigitCount();
 }

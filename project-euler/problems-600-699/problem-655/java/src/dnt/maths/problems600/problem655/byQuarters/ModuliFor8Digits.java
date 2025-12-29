@@ -39,9 +39,9 @@ public class ModuliFor8Digits implements ModuliCalculator
         System.out.print("INFO:Finished creating moduli class.\n");
     }
 
-    public int[] get(int i)
+    public int get(int i)
     {
-        return modulusForA.get(i);
+        return 0;
     }
 
     public int getFirst()

@@ -42,37 +42,37 @@ public class PalindromeExtractorOdd implements PalindromeExtractor
         int lastA = moduliA.getLast();
         for (int a = firstA; a <= lastA; a++)
         {
-            int[] recordA = moduliA.get(a);
+            int modA = moduliA.get(a);
 
             int d = REVERSE_DIGITS[a];
-            int[] recordD = moduliD.get(d);
+            int modD = moduliD.get(d);
 
             int lastB = moduliB.getLast();
             int lastC = moduliC.getLast();
             assert lastB == lastC;
-            for (int j = 0; j <= lastB; j++)
+            for (int b = 0; b <= lastB; b++)
             {
-                int[] recordB = moduliB.get(j);
+                int modB = moduliB.get(b);
 
-                int c = reverseDigits(j);
-                int[] recordC = moduliC.get(c);
+                int c = reverseDigits(b);
+                int modC = moduliC.get(c);
 
                 for(int k = 0; k < 10; k++)
                 {
-                    int[] recordMid = moduliMid.get(k);
+                    int modMid = moduliMid.get(k);
 
-                    int modulusSum = modulus(recordA) + modulus(recordB) + modulus(recordMid) + modulus(recordC) + modulus(recordD);
+                    int modulusSum = (modA) + (modB) + (modMid) + (modC) + (modD);
                     if (modulusSum % BD10000019.intValue() == 0)
                     {
 //                    System.out.printf("Palindrome found. %s %s %s %s\n", recordA, recordB, recordC, recordD);
 //                    System.out.printf("%08d%08d%08d%08d %% 10000019\n", recordA.number(), recordB.number(), recordC.number(), recordD.number());
 //
                         BigDecimal bigPalindrome = new BigDecimal(
-                                String.format("%0" + moduliA.getDigitCount() + "d", number(recordA)) +
-                                String.format("%0" + moduliB.getDigitCount() + "d", number(recordB)) +
-                                String.format("%0" + moduliMid.getDigitCount() + "d", number(recordMid)) +
-                                String.format("%0" + moduliC.getDigitCount() + "d", number(recordC)) +
-                                String.format("%0" + moduliD.getDigitCount() + "d", number(recordD))
+                                String.format("%0" + moduliA.getDigitCount() + "d", (a)) +
+                                String.format("%0" + moduliB.getDigitCount() + "d", (b)) +
+                                String.format("%0" + moduliMid.getDigitCount() + "d", (k)) +
+                                String.format("%0" + moduliC.getDigitCount() + "d", (c)) +
+                                String.format("%0" + moduliD.getDigitCount() + "d", (d))
                         );
                         palindromeConsumer.accept(bigPalindrome);
                         palindromeCount++;

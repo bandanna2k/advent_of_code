@@ -31,17 +31,17 @@ public class PalindromeExtractorEvenAD implements PalindromeExtractor
         int lastA = moduliA.getLast();
         for (int a = firstA; a <= lastA; a++)
         {
-            int[] recordA = moduliA.get(a);
+            int modA = moduliA.get(a);
 
             int d = REVERSE_DIGITS[a];
-            int[] recordD = moduliD.get(d);
+            int modD = moduliD.get(d);
 
-            int modulusSum = modulus(recordA) + modulus(recordD);
+            int modulusSum = (modA) + (modD);
             if (modulusSum % BD10000019.intValue() == 0)
             {
                 BigDecimal bigPalindrome = new BigDecimal(
-                        String.format("%0" + moduliA.getDigitCount() + "d", number(recordA)) +
-                                String.format("%0" + moduliD.getDigitCount() + "d", number(recordD))
+                        String.format("%0" + moduliA.getDigitCount() + "d", a) +
+                                String.format("%0" + moduliD.getDigitCount() + "d", d)
                 );
                 palindromeConsumer.accept(bigPalindrome);
                 palindromeCount++;

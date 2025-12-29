@@ -1,6 +1,9 @@
 package dnt.maths.problems600.problem655.byQuarters;
 
+import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.Random;
 
 import static dnt.maths.problems600.problem655.byQuarters.ReverseDigits.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,5 +38,18 @@ public class ReverseDigitsTest
         assertThat(padLeft("1")).isEqualTo("00000001");
         assertThat(padLeft("987654321")).isEqualTo("987654321");
         assertThat(padLeft("7654321")).isEqualTo("07654321");
+    }
+
+    @Test
+    @Ignore // Not fast
+    public void testLoadSave()
+    {
+        int[] loaded = load();
+        Random random = new Random(1);
+        for (int i = 0; i < 100; i++)
+        {
+            int index = random.nextInt(REVERSE_DIGITS.length);
+            assertThat(loaded[index]).isEqualTo(REVERSE_DIGITS[index]);
+        }
     }
 }
