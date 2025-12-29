@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
+import static dnt.maths.problems600.problem655.PalindromeUtils.isPalindrome;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestLength24
@@ -30,8 +31,10 @@ public class TestLength24
         ModuliCalculatorImpl modCalculatorD = new ModuliCalculatorImpl(8, 1, BD10000019.intValue());
 
         PalindromeExtractor extractor = new PalindromeExtractorEven(modCalculatorA, modCalculatorB, modCalculatorC, modCalculatorD,
-                bigPalindrome -> {
-                    System.out.println(bigPalindrome + " % " + BD10000019.intValue());
+                bigPalindrome ->
+                {
+                    assertThat(isPalindrome(bigPalindrome));
+                    System.out.println(bigPalindrome);
                 });
         extractor.go();
         assertThat(extractor.getPalindromeCount()).isEqualTo(100);

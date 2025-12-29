@@ -22,8 +22,8 @@ public class TestLength20
         assertThat(checker.getPalindromeCount()).isEqualTo(10);
     }
 
-    @Test
-    public void testLength18UsingPalindromeExtractor()
+    @Test // 1 min, 28 secs
+    public void testLength20UsingPalindromeExtractor()
     {
         ModuliCalculator calculatorA = new ModuliCalculatorImpl(8, 13, BD10000019.intValue());
         ModuliCalculator calculatorB = new ModuliCalculatorImpl(2, 11, BD10000019.intValue());
@@ -33,6 +33,34 @@ public class TestLength20
         PalindromeExtractor extractor = new PalindromeExtractorEven(calculatorA, calculatorB, calculatorC, calculatorD,
                 System.out::println);
         extractor.go();
-        assertThat(extractor.getPalindromeCount()).isEqualTo(726);
+        assertThat(extractor.getPalindromeCount()).isEqualTo(711);
+    }
+
+    @Test // 54 secs
+    public void testLength20UsingPalindromeExtractor2()
+    {
+        ModuliCalculator calculatorA = new ModuliCalculatorImpl(7, 14, BD10000019.intValue());
+        ModuliCalculator calculatorB = new ModuliCalculatorImpl(3, 11, BD10000019.intValue());
+        ModuliCalculator calculatorC = new ModuliCalculatorImpl(3, 8, BD10000019.intValue());
+        ModuliCalculator calculatorD = new ModuliCalculatorImpl(7, 1, BD10000019.intValue());
+
+        PalindromeExtractor extractor = new PalindromeExtractorEven(calculatorA, calculatorB, calculatorC, calculatorD,
+                System.out::println);
+        extractor.go();
+        assertThat(extractor.getPalindromeCount()).isEqualTo(711);
+    }
+
+    @Test // 1 min, 19 secs
+    public void testLength20UsingPalindromeExtractor3()
+    {
+        ModuliCalculator calculatorA = new ModuliCalculatorImpl(5, 16, BD10000019.intValue());
+        ModuliCalculator calculatorB = new ModuliCalculatorImpl(5, 11, BD10000019.intValue());
+        ModuliCalculator calculatorC = new ModuliCalculatorImpl(5, 6, BD10000019.intValue());
+        ModuliCalculator calculatorD = new ModuliCalculatorImpl(5, 1, BD10000019.intValue());
+
+        PalindromeExtractor extractor = new PalindromeExtractorEven(calculatorA, calculatorB, calculatorC, calculatorD,
+                System.out::println);
+        extractor.go();
+        assertThat(extractor.getPalindromeCount()).isEqualTo(711);
     }
 }

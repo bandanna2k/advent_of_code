@@ -1,13 +1,12 @@
 package dnt.maths.problems600.problem655;
 
 import dnt.maths.problems600.problem655.byQuarters.*;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
 
+import static dnt.maths.problems600.problem655.Assertions.assertIsPalindromeAndDivisible;
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,5 +35,22 @@ public class TestLength17
         assertThat(extractorAD.getPalindromeCount()).isEqualTo(91);
 
         System.out.printf("INFO:%s:End %d\n", now = Instant.now(), Duration.between(start, now).toMillis());
+    }
+
+    @Test
+    public void test17CharUsingPalindromeExtractor2()
+    {
+        ModuliCalculator moduliA = new ModuliCalculatorImpl(4, 14, BD10000019.intValue());
+        ModuliCalculator moduliB = new ModuliCalculatorImpl(4, 10, BD10000019.intValue());
+        ModuliCalculator moduliMid = new ModuliCalculatorImpl(1, 9, BD10000019.intValue());
+        ModuliCalculator moduliC = new ModuliCalculatorImpl(4, 5, BD10000019.intValue());
+        ModuliCalculator moduliD = new ModuliCalculatorImpl(4, 1, BD10000019.intValue());
+        PalindromeExtractor extractor = new PalindromeExtractorOdd(moduliA, moduliB, moduliMid, moduliC, moduliD, x ->
+        {
+            assertIsPalindromeAndDivisible(x);
+            System.out.println(x);
+        });
+        extractor.go();
+        assertThat(extractor.getPalindromeCount()).isEqualTo(91);
     }
 }

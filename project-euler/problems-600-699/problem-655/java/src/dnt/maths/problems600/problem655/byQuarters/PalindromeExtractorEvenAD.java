@@ -1,5 +1,7 @@
 package dnt.maths.problems600.problem655.byQuarters;
 
+import dnt.maths.problems600.problem655.ReverseDigits;
+
 import java.math.BigDecimal;
 import java.util.function.Consumer;
 

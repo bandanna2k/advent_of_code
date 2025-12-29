@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 import static dnt.common.BigDecimalUtils.*;
-import static dnt.maths.problems600.problem655.Constants.BD10000019;
-import static dnt.maths.problems600.problem655.PalindromeUtils.isPalindrome;
+import static dnt.maths.problems600.problem655.Assertions.assertIsDivisible;
+import static dnt.maths.problems600.problem655.Assertions.assertIsPalindromeAndDivisible;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -50,19 +50,16 @@ public class TestGeneral
     @Test
     public void testPalindromes()
     {
-        assertIsPalindromeDivisible("10000000897393533539379800000001");
-        assertIsPalindromeDivisible("10000000940776944967704900000001");
-        assertIsPalindromeDivisible("10000001016677066077661010000001");
-        assertIsPalindromeDivisible("10000001017159966995171010000001");
-        assertIsPalindromeDivisible("10000001061171600617116010000001");
-        assertIsPalindromeDivisible("10000000303875800857830300000001");
-    }
+        assertIsDivisible(216778101877612L);
+        assertIsPalindromeAndDivisible("216778101877612"); // 15
 
-    private static void assertIsPalindromeDivisible(String input)
-    {
-        BigDecimal test = new BigDecimal(input);
-        BigDecimal divided = test.divide(BD10000019);
-        assertTrue(isWholeNumber(divided));
-        assertTrue(isPalindrome(test));
+        assertIsPalindromeAndDivisible("96399288088299369"); // 17
+
+        assertIsPalindromeAndDivisible("10000000897393533539379800000001"); // 32
+        assertIsPalindromeAndDivisible("10000000940776944967704900000001");
+        assertIsPalindromeAndDivisible("10000001016677066077661010000001");
+        assertIsPalindromeAndDivisible("10000001017159966995171010000001");
+        assertIsPalindromeAndDivisible("10000001061171600617116010000001");
+        assertIsPalindromeAndDivisible("10000000303875800857830300000001");
     }
 }

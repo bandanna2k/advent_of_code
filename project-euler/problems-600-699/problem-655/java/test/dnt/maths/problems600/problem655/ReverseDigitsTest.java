@@ -1,8 +1,8 @@
-package dnt.maths.problems600.problem655.byQuarters;
+package dnt.maths.problems600.problem655;
 
 import org.junit.Test;
 
-import static dnt.maths.problems600.problem655.byQuarters.ReverseDigits.*;
+import static dnt.maths.problems600.problem655.ReverseDigits.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ReverseDigitsTest

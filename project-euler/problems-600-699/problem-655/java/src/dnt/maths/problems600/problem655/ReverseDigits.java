@@ -1,6 +1,5 @@
-package dnt.maths.problems600.problem655.byQuarters;
+package dnt.maths.problems600.problem655;
 
-import java.io.*;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,8 +7,6 @@ import java.util.Map;
 public class ReverseDigits
 {
     private final static Map<Integer, ReverseDigits> CACHE = new HashMap<>();
-
-    private static final int MAX_NUMBERS = 10_000_000 * 10;
 
     public final int[] reverseDigits;
     private final int number;
@@ -25,24 +22,28 @@ public class ReverseDigits
     }
     private ReverseDigits(int number)
     {
-        this.reverseDigits = getReverseDigits();
+        this.reverseDigits = getNewReverseDigits(number);
         this.number = number;
     }
 
-    private static int[] getReverseDigits()
+    private static int[] getNewReverseDigits(int number)
     {
-        System.out.println(Instant.now() + " Start:\tReversing digits.");
-        int[] reverseDigits = new int[MAX_NUMBERS];
-        for (int i = 0; i < MAX_NUMBERS; i++)
+        System.out.printf(Instant.now() + " Start:\tReversing digits for %d.%n", number);
+        int power = (int) Math.pow(10, number);
+        int[] reverseDigits = new int[power];
+        for (int i = 0; i < power; i++)
         {
-            reverseDigits[i] = reverseDigits(i);
+            reverseDigits[i] = reverseDigits(i, number);
         }
         System.out.println(Instant.now() + " End:\tReversing digits.");
         return reverseDigits;
     }
 
     static int reverseDigits(int n) {
-        String string = padLeft(String.valueOf(n));
+        return reverseDigits(n, 8);
+    }
+    private static int reverseDigits(int n, int padTo) {
+        String string = padLeft(String.valueOf(n), padTo);
         String reversed = "";
         for (int i = string.length() - 1; i >= 0; i--) {
             // Append each character to the new string in reverse order
@@ -54,7 +55,7 @@ public class ReverseDigits
     static String padLeft(String input) {
         return padLeft(input, 8);
     }
-    static String padLeft(String input, int padTo) {
+    private static String padLeft(String input, int padTo) {
         String padding = "";
         for (int i = 0; i < Math.max(0, padTo - input.length()); i++)
         {

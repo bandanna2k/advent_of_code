@@ -13,39 +13,71 @@ less than means
 
 ## Strategy
 
-| Chars | Strategy                | Palindrome Count | Strategies | Time Taken             |
-|-------|-------------------------|------------------|------------|------------------------|
-| 8     | Brute Force             | 0                |            | 0.02 secs              |
-| 9     | "                       | 0                |            | 0.2 secs               |
-| 10    | "                       | 0                |            | 0.15 secs              |
-| 11    | "                       | 0                |            | 0.9 secs               |
-| 12    | "                       | 0                |            | 1.2 secs               |
-| 13    | "                       | 6 (need 2nd)     |            | 4.2 secs               |
-| 14    | "                       | 0                |            | 13 secs                |
-| 15    | "                       | 48 (need 2nd)    |            | 43 secs                |
-| 16    | "                       | 8                | 4          | 1 sec / .2             |
-| 16    | Optimised x2            | 8                | 4          | 1 sec / .2             |
-| 16    | Optimised x4            | 8                | 4          | 1 sec / .2             |
-| 16    | Palindrome Extractor    | 8                | 4          | 32 secs                |
-| 17    | Brute Force             | not correct      |            | 6 mins                 |
-| 17    | Palindrome Extractor    | 91               |            | 42 secs                |
-| 18    | Optimised (x2 & x4)     | 101              |            | 48 secs / 1.5 s        |
-| 18    | Palindrome Extractor    | 101              |            | 41 secs                |
-| 19    | "                       |                  |            |                        |
-| 20    | "                       | 10 711 706       |            | 52 secs / 7 mins / 53s |
-| 20    | Palindrome Extractor    | 726              |            | 2 min 2 secs           |
-| 21    | "                       |                  |            |                        |
-| 22    | "                       |                  |            |                        |
-| 23    | "                       |                  |            |                        |
-| 24    | Palindrome Extractor    | 90225            |            | 4 hours                |
-| 25    | "                       |                  |            |                        |
-| 26    | "                       |                  |            |                        |
-| 27    | "                       |                  |            |                        |
-| 28    | "                       |                  |            |                        |
-| 29    | "                       |                  |            |                        |
-| 30    | "                       |                  |            |                        |
-| 31    | "                       |                  |            |                        |
-| 32    | "                       |                  |            |                        |
+### Jan 2025
+
+| Chars | Count | Time Taken     | Pal. Extractor                   |
+|-------|-------|----------------|----------------------------------|
+| 8     |       | 0.02 secs      |                                  |
+| 9     |       | 0.2 secs       |                                  |
+| 10    |       | 0.15 secs      |                                  |
+| 11    |       | 0.9 secs       |                                  |
+| 12    |       | 1.2 secs       |                                  |
+| 13    |       | 4.2 secs       |                                  |
+| 14    |       | 13 secs        |                                  |
+| 15    | 0     | .371 secs      | 0 [<1 sec] (Jan 2025)            |
+| 16    | 8     | 21 secs        | 8 [21 secs] (Jan 2025)           |
+| 17    |       | 5 secs         | 91 [5 secs] (Jan 2025)           |
+| 18    |       | ? secs         | 101 (Jan 2025)                   | 
+| 19    |       | 1 min, 3 secs  | 924 [1 min, 3 secs] (Jan 2025)   |
+| 20    |       | 1 min, 28 secs | 711 [1 min 28 secs] (Jan 2025)   |
+| 21    |       |                |                                  |
+| 22    |       | 8 min, 53 secs | 8974 [8 min, 53 secs] (Jan 2025) |
+| 23    |       |                |                                  |
+| 24    |       | 4 hours        |                                  |
+| 25    |       |                |                                  |
+| 26    |       |                |                                  |
+| 27    |       |                |                                  |
+| 28    |       |                |                                  |
+| 29    |       |                |                                  |
+| 30    |       |                |                                  |
+| 31    |       |                |                                  |
+| 32    |       |                |                                  |
+
+---
+
+| Chars | Strategy                | Palindrome Count | Strategies | Time Taken             | Pal. Extractor                   |
+|-------|-------------------------|------------------|------------|------------------------|----------------------------------|
+| 8     | Brute Force             | 0                |            | 0.02 secs              |                                  |
+| 9     | "                       | 0                |            | 0.2 secs               |                                  |
+| 10    | "                       | 0                |            | 0.15 secs              |                                  |
+| 11    | "                       | 0                |            | 0.9 secs               |                                  |
+| 12    | "                       | 0                |            | 1.2 secs               |                                  |
+| 13    | "                       | 6 (need 2nd)     |            | 4.2 secs               |                                  |
+| 14    | "                       | 0                |            | 13 secs                |                                  |
+| 15    | "                       | 48 (need 2nd)    |            | 43 secs                | 0 [<1 sec] (Jan 2025)            |
+| 16    | "                       | 8                | 4          | 1 sec / .2             |                                  |
+| 16    | Optimised x2            | 8                | 4          | 1 sec / .2             |                                  |
+| 16    | Optimised x4            | 8                | 4          | 1 sec / .2             |                                  |
+| 16    | Palindrome Extractor    | 8                | 4          | 32 secs                | 8 [21 secs] (Jan 2025)           |
+| 17    | Brute Force             | not correct      |            | 6 mins                 |                                  |
+| 17    | Palindrome Extractor    | 91               |            | 42 secs                | 91 [5 secs] (Jan 2025)           |
+| 18    | Optimised (x2 & x4)     | 101              |            | 48 secs / 1.5 s        |                                  |
+| 18    | Palindrome Extractor    | 101              |            | 41 secs                | 101 (Jan 2025)                   | 
+| 19    | "                       |                  |            |                        | 924 [1 min, 3 secs] (Jan 2025)   |
+| 20    | "                       | 10 711 706       |            | 52 secs / 7 mins / 53s |                                  |
+| 20    | Palindrome Extractor    | 711              |            |                        | 711 [1 min 28 secs] (Jan 2025)   |
+| 21    | "                       |                  |            |                        |                                  |
+| 22    | Palindrome Extractor    | 8974             |            |                        | 8974 [8 min, 53 secs] (Jan 2025) |
+| 23    | "                       |                  |            |                        |                                  |
+| 24    | Palindrome Extractor    | 90225            |            | 4 hours                |                                  |
+| 25    | "                       |                  |            |                        |                                  |
+| 26    | "                       |                  |            |                        |                                  |
+| 27    | "                       |                  |            |                        |                                  |
+| 28    | "                       |                  |            |                        |                                  |
+| 29    | "                       |                  |            |                        |                                  |
+| 30    | "                       |                  |            |                        |                                  |
+| 31    | "                       |                  |            |                        |                                  |
+| 32    | "                       |                  |            |                        |                                  |
  
 ## Questions
 
