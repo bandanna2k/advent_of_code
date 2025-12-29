@@ -6,9 +6,10 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.time.Instant;
 
-import static dnt.common.BigDecimalUtils.firstDivisibleNumberAfter;
-import static dnt.common.BigDecimalUtils.firstDivisibleNumberAfterINEFFICIENT;
+import static dnt.common.BigDecimalUtils.*;
+import static dnt.maths.problems600.problem655.Constants.BD10000019;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class TestGeneral
 {
@@ -43,5 +44,13 @@ public class TestGeneral
         {
             return s.compareTo(value) == 0;
         }
+    }
+
+    @Test
+    public void testPalindrome()
+    {
+        BigDecimal test = new BigDecimal("10000000024260950590624200000001");
+        BigDecimal divided = test.divide(BD10000019);
+        assertTrue(isWholeNumber(divided));
     }
 }

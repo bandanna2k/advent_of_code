@@ -48,4 +48,12 @@ Needs -Xmx12g
         extractor.go();
         assertThat(extractor.getPalindromeCount()).isEqualTo(101);
     }
+
+    @Test
+    public void testDivisorX4()
+    {
+        int divisor = BD10000019.intValue();
+        divisor *= 4;
+        assertThat((long)divisor).isEqualTo(BD10000019.longValue()*4);
+    }
 }

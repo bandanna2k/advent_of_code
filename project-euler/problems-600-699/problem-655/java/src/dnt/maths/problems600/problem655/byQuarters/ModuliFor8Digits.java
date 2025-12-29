@@ -65,8 +65,8 @@ public class ModuliFor8Digits implements ModuliCalculator
     {
         return "ModuliFor8Digits{" +
                 "modulusForA=" + modulusForA.size() +
-                "getFirst=" + getFirst() +
-                "getLast=" + getLast() +
+                ",getFirst=" + getFirst() +
+                ",getLast=" + getLast() +
                 '}';
     }
 }
