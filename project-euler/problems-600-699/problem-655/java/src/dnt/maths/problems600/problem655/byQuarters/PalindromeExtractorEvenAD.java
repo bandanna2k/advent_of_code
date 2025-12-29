@@ -4,15 +4,13 @@ import java.math.BigDecimal;
 import java.util.function.Consumer;
 
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
-import static dnt.maths.problems600.problem655.byQuarters.ModulusRecord.modulus;
-import static dnt.maths.problems600.problem655.byQuarters.ModulusRecord.number;
-import static dnt.maths.problems600.problem655.byQuarters.ReverseDigits.REVERSE_DIGITS;
 
 public class PalindromeExtractorEvenAD implements PalindromeExtractor
 {
     private final ModuliCalculator moduliA;
     private final ModuliCalculator moduliD;
     private final Consumer<BigDecimal> palindromeConsumer;
+    private final ReverseDigits reverseDigits;
     private long palindromeCount = 0;
 
     public PalindromeExtractorEvenAD(ModuliCalculator moduliA,
@@ -23,6 +21,7 @@ public class PalindromeExtractorEvenAD implements PalindromeExtractor
         this.moduliA = moduliA;
         this.moduliD = moduliD;
         assert moduliA.getDigitCount() == moduliD.getDigitCount();
+        reverseDigits = ReverseDigits.getReverseDigits(8);
     }
 
     public void go()
@@ -33,7 +32,7 @@ public class PalindromeExtractorEvenAD implements PalindromeExtractor
         {
             int modA = moduliA.get(a);
 
-            int d = REVERSE_DIGITS[a];
+            int d = reverseDigits.reverseDigits[a];
             int modD = moduliD.get(d);
 
             int modulusSum = (modA) + (modD);

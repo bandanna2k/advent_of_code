@@ -4,9 +4,6 @@ import java.math.BigDecimal;
 import java.util.function.Consumer;
 
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
-import static dnt.maths.problems600.problem655.byQuarters.ModulusRecord.modulus;
-import static dnt.maths.problems600.problem655.byQuarters.ModulusRecord.number;
-import static dnt.maths.problems600.problem655.byQuarters.ReverseDigits.REVERSE_DIGITS;
 import static dnt.maths.problems600.problem655.byQuarters.ReverseDigits.reverseDigits;
 
 public class PalindromeExtractorOdd implements PalindromeExtractor
@@ -17,6 +14,7 @@ public class PalindromeExtractorOdd implements PalindromeExtractor
     private final ModuliCalculator moduliC;
     private final ModuliCalculator moduliD;
     private final Consumer<BigDecimal> palindromeConsumer;
+    private final ReverseDigits reverseDigits;
     private long palindromeCount = 0;
 
     public PalindromeExtractorOdd(ModuliCalculator moduliA,
@@ -34,6 +32,11 @@ public class PalindromeExtractorOdd implements PalindromeExtractor
         this.moduliD = moduliD;
         assert moduliA.getDigitCount() == moduliD.getDigitCount();
         assert moduliB.getDigitCount() == moduliC.getDigitCount();
+        reverseDigits = ReverseDigits.getReverseDigits(8);
+
+        int lastB = moduliB.getLast();
+        int lastC = moduliC.getLast();
+        assert lastB == lastC;
     }
 
     public void go()
@@ -44,12 +47,10 @@ public class PalindromeExtractorOdd implements PalindromeExtractor
         {
             int modA = moduliA.get(a);
 
-            int d = REVERSE_DIGITS[a];
+            int d = reverseDigits.reverseDigits[a];
             int modD = moduliD.get(d);
 
             int lastB = moduliB.getLast();
-            int lastC = moduliC.getLast();
-            assert lastB == lastC;
             for (int b = 0; b <= lastB; b++)
             {
                 int modB = moduliB.get(b);

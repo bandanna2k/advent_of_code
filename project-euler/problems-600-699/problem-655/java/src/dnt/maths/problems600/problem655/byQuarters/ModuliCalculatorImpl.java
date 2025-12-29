@@ -37,7 +37,6 @@ public class ModuliCalculatorImpl implements ModuliCalculator
         int intModA = bigModA.intValue();
         int intModAIncrement = bigModA.intValue() % intDivisor;
 
-        //modulusForA.add(new int[] {0, 0});
         moduli[0] = 0;
         for (int a = 1; a < arraySize; a++)
         {

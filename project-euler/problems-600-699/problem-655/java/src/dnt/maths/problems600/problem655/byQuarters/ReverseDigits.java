@@ -2,11 +2,32 @@ package dnt.maths.problems600.problem655.byQuarters;
 
 import java.io.*;
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 
-public abstract class ReverseDigits
+public class ReverseDigits
 {
+    private final static Map<Integer, ReverseDigits> CACHE = new HashMap<>();
+
     private static final int MAX_NUMBERS = 10_000_000 * 10;
-    static final int[] REVERSE_DIGITS = getReverseDigits();
+
+    public final int[] reverseDigits;
+    private final int number;
+
+    public static ReverseDigits getReverseDigits(int number) {
+        ReverseDigits reverseDigits = CACHE.get(number);
+        if(reverseDigits == null)
+        {
+            reverseDigits = new ReverseDigits(number);
+            CACHE.put(reverseDigits.number, reverseDigits);
+        }
+        return reverseDigits;
+    }
+    private ReverseDigits(int number)
+    {
+        this.reverseDigits = getReverseDigits();
+        this.number = number;
+    }
 
     private static int[] getReverseDigits()
     {
@@ -31,35 +52,14 @@ public abstract class ReverseDigits
     }
 
     static String padLeft(String input) {
+        return padLeft(input, 8);
+    }
+    static String padLeft(String input, int padTo) {
         String padding = "";
-        for (int i = 0; i < Math.max(0, 8 - input.length()); i++)
+        for (int i = 0; i < Math.max(0, padTo - input.length()); i++)
         {
             padding += "0";
         }
         return padding + input;
-    }
-
-    private static final String REVERSE_DIGITS_BIN = "/tmp/reverseDigits.bin";
-    private static void save(int[] values)
-    {
-        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(REVERSE_DIGITS_BIN))) {
-            for (int n : values)
-                dos.writeInt(n);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    @Deprecated // Not fast at all
-    static int[] load()
-    {
-        int[] reverseDigits = new int[MAX_NUMBERS];
-        try (DataInputStream dis = new DataInputStream(new FileInputStream(REVERSE_DIGITS_BIN))) {
-            for (int i = 0; i < MAX_NUMBERS; i++) {
-                reverseDigits[i] = dis.readInt();
-            }
-        } catch (IOException e) {
-            return null;
-        }
-        return reverseDigits;
     }
 }
