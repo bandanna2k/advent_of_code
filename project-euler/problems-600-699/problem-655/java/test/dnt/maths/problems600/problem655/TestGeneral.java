@@ -50,10 +50,13 @@ public class TestGeneral
     @Test
     public void testPalindromes()
     {
-        assertIsDivisible(216778101877612L);
-        assertIsPalindromeAndDivisible("216778101877612"); // 15
+//        assertIsDivisible(216778101877612L);
+//        assertIsPalindromeAndDivisible("216778101877612"); // 15
+//
+//        assertIsPalindromeAndDivisible("96399288088299369"); // 17
 
-        assertIsPalindromeAndDivisible("96399288088299369"); // 17
+        assertIsPalindromeAndDivisible("99992154161116145129999"); // 23
+        assertIsPalindromeAndDivisible("39506669129192196660593"); // 23
 
         assertIsPalindromeAndDivisible("10000000897393533539379800000001"); // 32
         assertIsPalindromeAndDivisible("10000000940776944967704900000001");

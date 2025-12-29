@@ -4,9 +4,11 @@ import dnt.maths.problems600.problem655.byQuarters.ModuliCalculator;
 import dnt.maths.problems600.problem655.byQuarters.ModuliCalculatorImpl;
 import dnt.maths.problems600.problem655.byQuarters.PalindromeExtractor;
 import dnt.maths.problems600.problem655.byQuarters.PalindromeExtractorEven;
+import dnt.maths.problems600.problem655.byQuarters.year2025.PalindromeExtractorMultiThreadedEven;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,16 +24,27 @@ public class TestLength20
         assertThat(checker.getPalindromeCount()).isEqualTo(10);
     }
 
-    @Test // 1 min, 28 secs
+    /*
+    1x CPU (1 min, 28 secs)
+     */
+    @Test
     public void testLength20UsingPalindromeExtractor()
     {
+        Progress progress = Progress.getAndStart();
+        AtomicInteger count = new AtomicInteger(0);
+
         ModuliCalculator calculatorA = new ModuliCalculatorImpl(8, 13, BD10000019.intValue());
         ModuliCalculator calculatorB = new ModuliCalculatorImpl(2, 11, BD10000019.intValue());
         ModuliCalculator calculatorC = new ModuliCalculatorImpl(2, 9, BD10000019.intValue());
         ModuliCalculator calculatorD = new ModuliCalculatorImpl(8, 1, BD10000019.intValue());
 
-        PalindromeExtractor extractor = new PalindromeExtractorEven(calculatorA, calculatorB, calculatorC, calculatorD,
-                System.out::println);
+        PalindromeExtractor extractor = new PalindromeExtractorMultiThreadedEven(calculatorA, calculatorB, calculatorC, calculatorD,
+                x ->
+                {
+                    progress.progress(x);
+                    count.incrementAndGet();
+                    System.out.println(x);
+                });
         extractor.go();
         assertThat(extractor.getPalindromeCount()).isEqualTo(711);
     }

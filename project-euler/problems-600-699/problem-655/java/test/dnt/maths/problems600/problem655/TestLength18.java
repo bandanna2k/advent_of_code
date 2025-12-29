@@ -1,13 +1,11 @@
 package dnt.maths.problems600.problem655;
 
 import dnt.maths.problems600.problem655.byQuarters.*;
-import org.junit.Ignore;
+import dnt.maths.problems600.problem655.byQuarters.year2025.PalindromeExtractorMultiThreadedEven;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.Duration;
-import java.time.Instant;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,20 +37,22 @@ Needs -Xmx12g
     public void testLength18UsingPalindromeExtractor()
     {
         Progress progress = Progress.getAndStart();
+        AtomicInteger count = new AtomicInteger(0);
 
         ModuliCalculator calculatorA = new ModuliCalculatorImpl(8, 11, BD10000019.intValue());
         ModuliCalculator calculatorB = new ModuliCalculatorImpl(1, 10, BD10000019.intValue());
         ModuliCalculator calculatorC = new ModuliCalculatorImpl(1, 9, BD10000019.intValue());
         ModuliCalculator calculatorD = new ModuliCalculatorImpl(8, 1, BD10000019.intValue());
 
-        PalindromeExtractor extractor = new PalindromeExtractorEven(calculatorA, calculatorB, calculatorC, calculatorD,
+        PalindromeExtractor extractor = new PalindromeExtractorMultiThreadedEven(calculatorA, calculatorB, calculatorC, calculatorD,
                 x ->
                 {
                     progress.progress(x);
+                    count.incrementAndGet();
                     System.out.println(x);
                 });
         extractor.go();
-        assertThat(extractor.getPalindromeCount()).isEqualTo(101);
+        assertThat(count.get()).isEqualTo(101);
     }
 
     @Test
