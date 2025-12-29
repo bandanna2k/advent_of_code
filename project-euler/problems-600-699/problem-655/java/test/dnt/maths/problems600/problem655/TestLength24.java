@@ -7,8 +7,8 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
+import static dnt.maths.problems600.problem655.Assertions.assertIsPalindromeAndDivisible;
 import static dnt.maths.problems600.problem655.Constants.BD10000019;
-import static dnt.maths.problems600.problem655.PalindromeUtils.isPalindrome;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestLength24
@@ -33,7 +33,7 @@ public class TestLength24
         PalindromeExtractor extractor = new PalindromeExtractorEven(modCalculatorA, modCalculatorB, modCalculatorC, modCalculatorD,
                 bigPalindrome ->
                 {
-                    assertThat(isPalindrome(bigPalindrome));
+                    assertIsPalindromeAndDivisible(bigPalindrome);
                     System.out.println(bigPalindrome);
                 });
         extractor.go();

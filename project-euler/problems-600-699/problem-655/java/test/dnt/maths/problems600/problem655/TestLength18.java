@@ -38,13 +38,19 @@ Needs -Xmx12g
     @Test
     public void testLength18UsingPalindromeExtractor()
     {
+        Progress progress = Progress.getAndStart();
+
         ModuliCalculator calculatorA = new ModuliCalculatorImpl(8, 11, BD10000019.intValue());
         ModuliCalculator calculatorB = new ModuliCalculatorImpl(1, 10, BD10000019.intValue());
         ModuliCalculator calculatorC = new ModuliCalculatorImpl(1, 9, BD10000019.intValue());
         ModuliCalculator calculatorD = new ModuliCalculatorImpl(8, 1, BD10000019.intValue());
 
         PalindromeExtractor extractor = new PalindromeExtractorEven(calculatorA, calculatorB, calculatorC, calculatorD,
-                System.out::println);
+                x ->
+                {
+                    progress.progress(x);
+                    System.out.println(x);
+                });
         extractor.go();
         assertThat(extractor.getPalindromeCount()).isEqualTo(101);
     }

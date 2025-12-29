@@ -82,9 +82,16 @@ public class TestLength16AndBelow
         Instant start, now;
         System.out.printf("INFO:%s:Start go\n", start = Instant.now());
 
+        Progress progress = Progress.getAndStart();
+
         ModuliCalculator moduliA = new ModuliCalculatorImpl(8, 9, BD10000019.intValue());
         ModuliCalculator moduliD = new ModuliCalculatorImpl(8, 1, BD10000019.intValue());
-        PalindromeExtractorEvenAD extractorAD = new PalindromeExtractorEvenAD(moduliA, moduliD, System.out::println);
+        PalindromeExtractorEvenAD extractorAD = new PalindromeExtractorEvenAD(moduliA, moduliD, x ->
+        {
+            Assertions.assertIsPalindromeAndDivisible(x);
+            progress.progress(x);
+            System.out.println(x);
+        });
         extractorAD.go();
         assertThat(extractorAD.getPalindromeCount()).isEqualTo(8);
 
