@@ -18,7 +18,8 @@ public abstract class BigDecimalUtils
         return isWholeNumber(scaled.divide(divisor, RoundingMode.DOWN));
     }
 
-    public static BigDecimal firstDivisibleNumberAfter(BigDecimal base, int divisor)
+    @Deprecated
+    public static BigDecimal firstDivisibleNumberAfterINEFFICIENT(BigDecimal base, int divisor)
     {
         for (int i = 1; i < divisor; i++)
         {
@@ -31,6 +32,20 @@ public abstract class BigDecimalUtils
             }
         }
         throw new RuntimeException("Failed to find firstDivisibleNumber");
+    }
+
+    public static BigDecimal firstDivisibleNumberAfter(BigDecimal base, int nDivisor)
+    {
+/*
+BigDecimal x = new BigDecimal(100);
+BigDecimal remainder = x.remainder(new BigDecimal(20));
+if (BigDecimal.ZERO.compareTo(remainder) == 0) {
+    System.out.println("x can be divided by 20");
+}
+ */
+        BigDecimal divisor = new BigDecimal(nDivisor);
+        BigDecimal remainder = base.remainder(divisor);
+        return base.subtract(remainder).add(divisor);
     }
 
     public static BigDecimal createFirstBigDecimal(int chars)

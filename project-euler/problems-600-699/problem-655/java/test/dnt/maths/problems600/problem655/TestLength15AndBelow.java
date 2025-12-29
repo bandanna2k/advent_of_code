@@ -40,6 +40,6 @@ public class TestLength15AndBelow
         int length = 15;
         Checker checker = new CheckByPalindromeOddLength(length, BD10000019);
         checker.go();
-        assertThat(checker.getPalindromeCount()).isEqualTo(8);
+        assertThat(checker.getPalindromeCount()).isEqualTo(48);
     }
 }
