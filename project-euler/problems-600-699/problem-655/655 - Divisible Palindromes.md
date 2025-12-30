@@ -15,23 +15,23 @@ less than means
 
 ### Jan 2025
 
-| Chars | Count | Time Taken     |
-|-------|-------|----------------|
-| 8     | 0     | <1 secs        |
-| 9     |       | <1 secs        |
-| 10    | 0     | <1 secs        |
-| 11    |       | <1 secs        |
-| 12    | 0     | <1 secs        |
-| 13    |       | 4.2 secs       |
-| 14    | 0     | 13 secs        |
-| 15    | 0     | .371 secs      |
-| 16    | 8     | 21 secs        |
-| 17    | 91    | 5 secs         |
-| 18    | 101   | 40 secs        | 
-| 19    | 924   | 1 min, 3 secs  |
-| 20    | 711   | 1 min, 28 secs |
-| 21    | 895   | 5 min, 21 secs |
-| 22    | 8974  | 8 min, 53 secs |
+| Chars | Count | Time Taken     | Time Combined  |
+|-------|-------|----------------|----------------|
+| 8     | 0     | <1 secs        |                |
+| 9     |       | <1 secs        |                |
+| 10    | 0     | <1 secs        |                |
+| 11    |       | <1 secs        |                |
+| 12    | 0     | <1 secs        |                |
+| 13    |       | 4.2 secs       |                |
+| 14    | 0     | 13 secs        |                |
+| 15    | 0     | .371 secs      |                |
+| 16    | 8     | 21 secs        |                |
+| 17    | 91    | 5 secs         |                |
+| 18    | 101   | 40 secs        | 27 secs        |       
+| 19    | 924   | 1 min, 3 secs  |                |
+| 20    | 711   | 1 min, 28 secs |                |
+| 21    | 895   | 5 min, 21 secs |                |
+| 22    | 8974  | 8 min, 53 secs | 2 min, 29 secs |
 | 23    | 89916 | 1 hr, 30 mins* |
 | 24    | 90410 | 1 hr, 15 mins  |
 | 25    |       |                |

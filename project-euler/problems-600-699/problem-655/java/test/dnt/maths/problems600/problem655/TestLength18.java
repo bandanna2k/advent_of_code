@@ -2,6 +2,7 @@ package dnt.maths.problems600.problem655;
 
 import dnt.maths.problems600.problem655.byQuarters.*;
 import dnt.maths.problems600.problem655.byQuarters.year2025.ModuliCalculatorCombined;
+import dnt.maths.problems600.problem655.byQuarters.year2025.PalindromeExtractorCombinedEven;
 import dnt.maths.problems600.problem655.byQuarters.year2025.PalindromeExtractorMultiThreadedEven;
 import org.junit.Test;
 
@@ -58,8 +59,6 @@ Needs -Xmx12g
     @Test
     public void testLength18UsingPalindromeExtractor2()
     {
-        Progress progress = Progress.getAndStart();
-
         ModuliCalculator calculatorA = new ModuliCalculatorImpl(8, 11, BD10000019.intValue());
         ModuliCalculator calculatorB = new ModuliCalculatorImpl(1, 10, BD10000019.intValue());
         ModuliCalculator calculatorC = new ModuliCalculatorImpl(1, 9, BD10000019.intValue());
@@ -67,9 +66,10 @@ Needs -Xmx12g
         ModuliCalculator calculatorAD = ModuliCalculatorCombined.create(calculatorA, calculatorD);
         ModuliCalculator calculatorBC = ModuliCalculatorCombined.create(calculatorB, calculatorC);
 
+        PalindromeExtractorCombinedEven extractor = new PalindromeExtractorCombinedEven(calculatorAD, calculatorBC, p -> {});
+        extractor.go();
 
-
-//        assertThat(0).isEqualTo(101);
+        assertThat(extractor.getPalindromeCount()).isEqualTo(101);
     }
     private static void prototype(String number)
     {
