@@ -1,6 +1,7 @@
 package dnt.maths.problems600.problem655;
 
 import dnt.maths.problems600.problem655.byQuarters.*;
+import dnt.maths.problems600.problem655.byQuarters.year2025.ModuliCalculatorCombined;
 import dnt.maths.problems600.problem655.byQuarters.year2025.PalindromeExtractorMultiThreadedEven;
 import org.junit.Test;
 
@@ -59,14 +60,14 @@ Needs -Xmx12g
     {
         Progress progress = Progress.getAndStart();
 
-        ModuliCalculator calculatorAD = new ModuliCalculatorDual(8, 11, 1, BD10000019.intValue());
-        ModuliCalculator calculatorBC = new ModuliCalculatorDual(1, 10, 9, BD10000019.intValue());
+        ModuliCalculator calculatorA = new ModuliCalculatorImpl(8, 11, BD10000019.intValue());
+        ModuliCalculator calculatorB = new ModuliCalculatorImpl(1, 10, BD10000019.intValue());
+        ModuliCalculator calculatorC = new ModuliCalculatorImpl(1, 9, BD10000019.intValue());
+        ModuliCalculator calculatorD = new ModuliCalculatorImpl(8, 1, BD10000019.intValue());
+        ModuliCalculator calculatorAD = ModuliCalculatorCombined.create(calculatorA, calculatorD);
+        ModuliCalculator calculatorBC = ModuliCalculatorCombined.create(calculatorB, calculatorC);
 
-        prototype("1000 0000 00 0000 0001".replace(" ", ""));
-        System.out.println(calculatorAD.get(10_000_000));
 
-        prototype("0000 0001 00 1000 0000".replace(" ", ""));
-        System.out.println(calculatorAD.get(1));
 
 //        assertThat(0).isEqualTo(101);
     }

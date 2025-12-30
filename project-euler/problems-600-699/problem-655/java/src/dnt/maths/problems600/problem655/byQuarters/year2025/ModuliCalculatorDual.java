@@ -1,4 +1,6 @@
-package dnt.maths.problems600.problem655.byQuarters;
+package dnt.maths.problems600.problem655.byQuarters.year2025;
+
+import dnt.maths.problems600.problem655.byQuarters.ModuliCalculator;
 
 import java.math.BigInteger;
 
